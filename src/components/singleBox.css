@@ -1,0 +1,17 @@
+.singleBox{
+    --x:10%;
+    background-color: rgb(83, 83, 83);
+    border-radius: 2px;
+    width: var(--x);
+    padding-top: var(--x);
+    margin: 2px;
+}
+.singleBox:hover{
+    background-color: rgb(100, 100, 100);
+}
+.singleBox:active{
+    background-color:rgb(75, 75, 75);
+}
+.selectedBox{
+    background-color: rgb(76, 76, 109);
+}

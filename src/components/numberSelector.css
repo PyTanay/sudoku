@@ -1,0 +1,29 @@
+.numberSelector{
+    --x:10%;
+    background-color: #282c34;
+    border:2px rgb(56, 125, 204) solid;
+    border-radius: 100%;
+    width: var(--x);
+    padding-top: var(--x);
+    margin: 10px;
+    margin-left: 4%;
+    margin-right: 4%;
+    position: relative;
+    transition: .2s ease-in-out;
+}
+.text{
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 7vw;
+    font-weight: 600;
+    color: white;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.numberSelector:hover{
+    background-color:rgb(56, 125, 204);
+    cursor: pointer;
+}
