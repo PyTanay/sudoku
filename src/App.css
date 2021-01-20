@@ -1,9 +1,19 @@
 .App {
   text-align: center;
   background-color: #282c34;
+  height: 100vh;
 }
-h1.title{
+.appHeader {
+  display: flex;
+  justify-content: center;
+}
+.mainGame {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+h1.title {
   color: white;
+  font-size: 3vw;
   padding: 0px;
   margin: 0px;
   margin-bottom: 20px;

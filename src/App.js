@@ -5,14 +5,28 @@ import './App.css';
 import WholeGrid from './components/WholeGrid';
 // import NumberSelector from './components/NumberSelector';
 import AllNumSel from './components/AllNumSel';
+import React,{ useState,useMemo} from 'react';
+export const AppContext=React.createContext();
 
 function App() {
+  const [selected, setSelected] = useState([])
+  const [value, setValue] = useState([[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)]])
+  const providerValue=useMemo(()=>({
+    selected,setSelected,value,setValue
+  }),[selected,value])
   return (
     <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="title">Sudoku</h1>
-        <WholeGrid />
-        <AllNumSel />
+      <AppContext.Provider value={providerValue}>
+        <div className="appHeader">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="title">Sudoku</h1>
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
+        <div className="mainGame">
+          <WholeGrid />
+          <AllNumSel />
+        </div>
+      </AppContext.Provider>
     </div>
   );
 }

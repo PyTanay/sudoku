@@ -6,7 +6,7 @@ function AllNumSel() {
     return (
         <div className="allNumSel">
             {[...Array(10)].map((x,index)=>(
-                <NumberSelector val={index}/>
+                <NumberSelector key={index} val={9-index}/>
             ))}
         </div>
     )

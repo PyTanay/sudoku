@@ -1,13 +1,13 @@
-import React from 'react'
+import React,{useState, useContext} from 'react'
+import {AppContext} from '../App'
 import OneRow from './OneRow'
+import './wholeGrid.css'
 
 function WholeGrid() {
+    const {selected,setSelected,value,setValue}=useContext(AppContext)
     return (
         <div className="wholeGrid">
-            {[...Array(8)].map((x,index)=>(
-                <OneRow key={index} row={index+1} />
-            ))}
-            <OneRow />
+            {[...Array(9)].map((x,index)=><OneRow key={index} row={index} selected={selected} setSelected={setSelected} value={value} />)}
         </div>
     )
 }
