@@ -13,8 +13,9 @@
 }
 .text {
   position: absolute;
-  text-align: center;
-  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 3vw;
   line-height: 4.5vw;
   font-weight: 600;

@@ -1,11 +1,13 @@
 .singleBox {
-  --x: 6%;
+  --x: 5.5%;
   background-color: rgb(83, 83, 83);
   border-radius: 2px;
   width: var(--x);
   padding-top: var(--x);
   margin: 2px;
   position: relative;
+  transition: .2s linear;
+  clip-path: circle(70% at 50% 50%);
 }
 .singleBox:hover {
   background-color: rgb(100, 100, 100);
@@ -14,8 +16,34 @@
   background-color: rgb(75, 75, 75);
 }
 .selectedBox {
-  background-color: rgb(38, 81, 199);
+  background-color: rgb(45, 111, 235);
+  transition: .2s ease-in;
+  animation: circle .2s ease-in-out;
+}
+@keyframes circle{
+  0%{
+    clip-path:circle(0% at 50% 50%);
+  }
+  100%{
+    clip-path:circle(70% at 50% 50%);
+  }
 }
 .selectedBox:hover {
-  background-color: rgb(45, 111, 235);
+  background-color:  rgb(38, 81, 199);
+}
+.text1 {
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 3vw;
+  line-height: 3.5vw;
+  font-weight: 300;
+  color: white;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.text1:hover{
+  cursor: pointer;
 }

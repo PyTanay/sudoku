@@ -1,25 +1,24 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useContext} from 'react'
 import {AppContext} from '../App'
 import './numberSelector.css'
 
 function NumberSelector(props) {
-    const [number, setNumber] = useState(0)
     const {value,setValue,selected}=useContext(AppContext)
-    useEffect(() => {
-        setNumber(props.val)
-    }, [props])
-    onclick=()=>{
-        if(selected[0]){
-            console.log(selected)
+    const onclick1=()=>{
+        if(selected[0]>=0){
             var temp=value;
-            temp[selected[0]][selected[1]]=number
-            setValue(temp)
+            if(props.val>=0 && props.val<10){
+                temp[selected[0]][selected[1]]=props.val
+            }else{
+                temp[selected[0]][selected[1]]=undefined
+            }
+            setValue([...temp])
         }
     }
     return (
-        <div className="numberSelector" onClick={onclick}>
+        <div className="numberSelector" onClick={onclick1}>
             <div className="text">
-                {number}
+                {props.val}
             </div>
         </div>
     )

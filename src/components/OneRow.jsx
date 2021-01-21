@@ -7,7 +7,7 @@ function OneRow(props) {
     return (
         <div className="oneRow">
             {[...Array(9)].map((i,index)=>(
-                <SingleBox key={index} col={index} row={row} selected={props.selected} setSelected={props.setSelected} value={props.value} />
+                <SingleBox key={index} col={index} row={row} />
             ))}
         </div>
     )
