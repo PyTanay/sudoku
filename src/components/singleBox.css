@@ -1,13 +1,22 @@
 .singleBox {
   --x: 5.5%;
-  background-color: rgb(83, 83, 83);
+  background-color: #2f333b;
   border-radius: 2px;
   width: var(--x);
   padding-top: var(--x);
   margin: 2px;
   position: relative;
-  transition: .2s linear;
+  transition: 0.2s linear;
   clip-path: circle(70% at 50% 50%);
+}
+@media only screen and (max-width: 600px) {
+  .singleBox {
+    --x: 8.5%;
+  }
+  .text1 {
+    font-size: 6vw !important;
+    line-height: 8vw !important;
+  }
 }
 .singleBox:hover {
   background-color: rgb(100, 100, 100);
@@ -17,19 +26,19 @@
 }
 .selectedBox {
   background-color: rgb(45, 111, 235);
-  transition: .2s ease-in;
-  animation: circle .2s ease-in-out;
+  transition: 0.2s ease-in;
+  animation: circle 0.2s cubic-bezier(0.41, 0.51, 0.24, 2.82) forwards;
 }
-@keyframes circle{
-  0%{
-    clip-path:circle(0% at 50% 50%);
+@keyframes circle {
+  0% {
+    clip-path: circle(70% at 50% 50%);
   }
-  100%{
-    clip-path:circle(70% at 50% 50%);
+  100% {
+    clip-path: circle(45% at 50% 50%);
   }
 }
 .selectedBox:hover {
-  background-color:  rgb(38, 81, 199);
+  background-color: rgb(38, 81, 199);
 }
 .text1 {
   position: absolute;
@@ -44,6 +53,22 @@
   bottom: 0;
   right: 0;
 }
-.text1:hover{
+.text1:hover {
   cursor: pointer;
+}
+.similarBox {
+  background-color: rgb(122, 134, 81);
+  transition: 0.2s ease-in;
+  animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
+}
+.similarBox:hover {
+  background-color: rgb(92, 102, 57);
+}
+.dangerBox {
+  background-color: rgb(185, 62, 62);
+  transition: 0.2s ease-in;
+  animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
+}
+.dangerBox:hover {
+  background-color: rgb(138, 44, 44);
 }

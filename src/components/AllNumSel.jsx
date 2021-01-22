@@ -4,7 +4,11 @@ import './allNumSel.css'
 import { BiEraser,BiReset } from "react-icons/bi";
 
 function AllNumSel() {
-    const arr1=[7,8,9,4,5,6,1,2,3,<BiEraser />,0,<BiReset />]
+    var arr1=[7,8,9,4,5,6,1,2,3,<BiEraser />,0,<BiReset />]
+    console.log(window.innerWidth)
+    if(window.innerWidth<=600) {
+        arr1=[0,1,2,3,4,5,6,7,8,9,<BiEraser />,<BiReset />]
+    }
     return (
         <div className="allNumSel">
             {arr1.map((x,index)=>(

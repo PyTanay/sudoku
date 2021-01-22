@@ -11,9 +11,14 @@
   display: grid;
   grid-template-columns: 70% 30%;
 }
+@media only screen and (max-width: 600px) {
+  .mainGame {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 h1.title {
   color: white;
-  font-size: 3vw;
+  font-size: 7vmin;
   padding: 0px;
   margin: 0px;
   margin-bottom: 20px;
