@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import OneRow from './OneRow'
 import './wholeGrid.css'
 import {AppContext} from '../App'
@@ -16,7 +16,6 @@ function WholeGrid() {
             }
             const tempArr=['ArrowUp','ArrowLeft','ArrowDown','ArrowRight']
             if(tempArr.includes(e.key)){
-                console.log(e.key)
                 switch (e.key) {
                     case "ArrowUp":
                         selected[0]!==0 && setSelected([selected[0]-1,selected[1]])
@@ -37,7 +36,6 @@ function WholeGrid() {
         }
         document.addEventListener("keydown",changeValue)
         console.log(selected)
-        document.myParam=selected
         return ()=>{
             document.removeEventListener("keydown",changeValue)
         }
