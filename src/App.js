@@ -11,9 +11,11 @@ export const AppContext=React.createContext();
 function App() {
   const [selected, setSelected] = useState([])
   const [value, setValue] = useState([[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)],[...Array(9)]])
-  const providerValue=useMemo(()=>({
-    selected,setSelected,value,setValue
-  }),[selected,value])
+  const providerValue={selected,setSelected,value,setValue}
+  
+  // useMemo(()=>({
+  //   selected,setSelected,value,setValue
+  // }),[selected,value])
   return (
     <div className="App">
       <AppContext.Provider value={providerValue}>
