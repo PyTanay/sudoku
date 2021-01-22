@@ -5,7 +5,7 @@ import './wholeGrid.css'
 function WholeGrid() {
     return (
         <div className="wholeGrid">
-            {[...Array(9)].map((x,index)=><OneRow key={index} row={index}  />)}
+            {[...Array(9)].map((x,index)=>(index===2||index===5)?<><OneRow key={index} row={index}  /><div className="hLine"></div></>:<OneRow key={index} row={index}  />)}
         </div>
     )
 }
