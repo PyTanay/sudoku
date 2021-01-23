@@ -5,12 +5,33 @@ import './App.css';
 import WholeGrid from './components/WholeGrid';
 // import NumberSelector from './components/NumberSelector';
 import AllNumSel from './components/AllNumSel';
-import React,{ useState} from 'react';
+import React,{ useState,useEffect} from 'react';
+import Utility from './components/Utility';
 export const AppContext=React.createContext();
 
 function App() {
+  useEffect(() => {
+    fetch('puzzleList.json',{headers:{'Content-Type':'application/json','Accept':'application/json'}})
+    .then(res=>{
+      return res.json()
+    })
+    .then(res=>{
+      const randSelector=Math.floor(Math.random()*res.database.length)
+      const tempData=res.database[randSelector].data
+      if(tempData!==undefined){
+        setInitialValue(res.database[randSelector].data)
+        setValue(res.database[randSelector].data)
+      }
+    })
+    // .then(()=>{
+    //   // console.log(initialValue)
+    //   setValue(initialValue)
+    // })
+    .catch(err=>{console.log("File could not be loaded for some reason!",err)})
+  }, [])
   const [selected, setSelected] = useState([undefined,undefined])
   const [value, setValue] = useState([[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null)])
+  const [initialValue, setInitialValue] = useState([])
   const getCol=(col)=>{
     var tempCol=[]
     value.forEach(elem=>{tempCol.push(elem[col])})
@@ -30,7 +51,7 @@ function App() {
     var tempCol=Math.floor(address[1]/3+1)
     return [tempRow,tempCol]
   }
-  const providerValue={selected,setSelected,value,setValue,getCol,getBlock,getBlockAddress}
+  const providerValue={selected,setSelected,value,setValue,getCol,getBlock,getBlockAddress,initialValue,setInitialValue}
   
   // useMemo(()=>({
   //   selected,setSelected,value,setValue
@@ -46,6 +67,7 @@ function App() {
         <div className="mainGame">
           <WholeGrid />
           <AllNumSel />
+          <Utility />
         </div>
       </AppContext.Provider>
     </div>

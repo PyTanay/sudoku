@@ -5,7 +5,6 @@ import { BiEraser,BiReset } from "react-icons/bi";
 
 function AllNumSel() {
     var arr1=[7,8,9,4,5,6,1,2,3,<BiEraser />,0,<BiReset />]
-    console.log(window.innerWidth)
     if(window.innerWidth<=600) {
         arr1=[0,1,2,3,4,5,6,7,8,9,<BiEraser />,<BiReset />]
     }

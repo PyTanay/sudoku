@@ -4,10 +4,10 @@
   border-radius: 2px;
   width: var(--x);
   padding-top: var(--x);
-  margin: 2px;
+  margin: 1px;
   position: relative;
-  transition: 0.2s linear;
-  clip-path: circle(70% at 50% 50%);
+  transition: .3s linear all;
+  /* clip-path: circle(70% at 50% 50%); */
 }
 @media only screen and (max-width: 600px) {
   .singleBox {
@@ -57,18 +57,26 @@
   cursor: pointer;
 }
 .similarBox {
-  background-color: rgb(122, 134, 81);
+  background-color: rgb(76, 83, 50);
   transition: 0.2s ease-in;
   animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
 }
 .similarBox:hover {
-  background-color: rgb(92, 102, 57);
+  background-color: rgb(57, 61, 41);
 }
 .dangerBox {
-  background-color: rgb(185, 62, 62);
+  background-color: rgb(141, 45, 45);
   transition: 0.2s ease-in;
   animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
 }
 .dangerBox:hover {
-  background-color: rgb(138, 44, 44);
+  background-color: rgb(83, 27, 27);
+}
+.disabledBox{
+  background-color: rgb(104, 104, 104);
+  transition: 0.2s ease-in;
+  animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
+}
+.dangerBox:hover {
+  cursor:-webkit-grab;
 }
