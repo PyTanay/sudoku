@@ -1,6 +1,5 @@
 .oneRow {
   display: flex;
-  /* width: 80%; */
   justify-content: center;
   margin: auto;
 }

@@ -13,6 +13,8 @@ function NumberSelector(props) {
                 temp[selected[0]][selected[1]]=null
             }
             setValue(temp)
+        }else{
+            
         }
     }
     return (

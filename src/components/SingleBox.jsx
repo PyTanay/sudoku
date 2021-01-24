@@ -29,6 +29,7 @@ function SingleBox(props) {
         }
     }
     //this is for validation and adds class to invalid cells
+    //row test
     if(selected[0]!==undefined && value[selected[0]][selected[1]]!==null && address[0]===selected[0] && address[1]!==selected[1]){
         if(value[address[0]].filter(x=>x===value[selected[0]][selected[1]]).length>1 && value[address[0]][address[1]]===value[selected[0]][selected[1]]){
             classList.push("dangerBox")
@@ -36,15 +37,17 @@ function SingleBox(props) {
             classList=classList.filter(elem=>elem!=="dangerBox")
         }
     }
+    //column test
     if(selected[0]!==undefined && value[selected[0]][selected[1]]!==null && address[1]===selected[1] && address[0]!==selected[0]){
-        if(getCol(selected[1]).filter(x=>x===value[selected[0]][selected[1]]).length>1 && value[address[0]][address[1]]===value[selected[0]][selected[1]]){
+        if(getCol(value,selected[1]).filter(x=>x===value[selected[0]][selected[1]]).length>1 && value[address[0]][address[1]]===value[selected[0]][selected[1]]){
             classList.push("dangerBox")
         }else{
             classList=classList.filter(elem=>elem!=="dangerBox")
         }
     }
+    //block test
     if(selected[0]!==undefined && value[selected[0]][selected[1]]!==null && address[0]!==selected[0] && getBlockAddress(address).toString()===getBlockAddress(selected).toString()){
-        if(getBlock(getBlockAddress(address)).filter(x=>x===value[address[0]][address[1]]).length>1 && value[address[0]][address[1]]===value[selected[0]][selected[1]]){
+        if(getBlock(value,getBlockAddress(address)).filter(x=>x===value[address[0]][address[1]]).length>1 && value[address[0]][address[1]]===value[selected[0]][selected[1]]){
             classList.push("dangerBox")
         }else{
             classList=classList.filter(elem=>elem!=="dangerBox")

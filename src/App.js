@@ -5,55 +5,61 @@ import './App.css';
 import WholeGrid from './components/WholeGrid';
 // import NumberSelector from './components/NumberSelector';
 import AllNumSel from './components/AllNumSel';
-import React,{ useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Utility from './components/Utility';
-export const AppContext=React.createContext();
+export const AppContext = React.createContext();
 
 function App() {
   useEffect(() => {
-    fetch('puzzleList.json',{headers:{'Content-Type':'application/json','Accept':'application/json'}})
-    .then(res=>{
-      return res.json()
-    })
-    .then(res=>{
-      const randSelector=Math.floor(Math.random()*res.database.length)
-      const tempData=res.database[randSelector].data
-      if(tempData!==undefined){
-        setInitialValue(res.database[randSelector].data)
-      }
-    }).catch(err=>{console.log("File could not be loaded for some reason!",err)})
+    const clickChecker = (e) => {
+      (e.target.classList[0]!=="text1") && setSelected([undefined,undefined])
+    }
+    fetch('puzzleList.json', { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } })
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        const randSelector = Math.floor(Math.random() * res.database.length)
+        const tempData = res.database[randSelector].data
+        if (tempData !== undefined) {
+          setInitialValue(res.database[randSelector].data)
+        }
+      }).catch(err => { console.log("File could not be loaded for some reason!", err) })
+    document.addEventListener("click", clickChecker)
+    return () => {
+      document.removeEventListener("click", clickChecker)
+    }
   }, [])
-  const [selected, setSelected] = useState([undefined,undefined])
-  const [value, setValue] = useState([[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null)])
-  const [initialValue, setInitialValue] = useState([])
+
+  const [selected, setSelected] = useState([undefined, undefined])
+  const [value, setValue] = useState(Array(9).fill(Array(9).fill(null)))
+  const [initialValue, setInitialValue] = useState(Array(9).fill(Array(9).fill(null)))
+  const [solution, setSolution] = useState(Array(9).fill(Array(9).fill([])))
   useEffect(() => {
-    if(initialValue.length>0)
-    setValue([...initialValue])
+    if (initialValue.length > 0)
+      setValue([...initialValue])
   }, [initialValue])
-  const getCol=(col)=>{
-    var tempCol=[]
-    value.forEach(elem=>{tempCol.push(elem[col])})
+  const getCol = (matrix,col) => {
+    var tempCol = []
+    matrix.forEach(elem => { tempCol.push(elem[col]) })
     return tempCol
   }
-  const getBlock=(blockAddress)=>{
-    var tempBlock=[]
-    value.forEach((elem,index)=>{
-      if(index<blockAddress[0]*3 && index>=(blockAddress[0]-1)*3){
-        tempBlock.push(...elem.slice((blockAddress[1]-1)*3,blockAddress[1]*3))
+  const getBlock = (matrix,blockAddress) => {
+    var tempBlock = []
+    matrix.forEach((elem, index) => {
+      if (index < blockAddress[0] * 3 && index >= (blockAddress[0] - 1) * 3) {
+        tempBlock.push(...elem.slice((blockAddress[1] - 1) * 3, blockAddress[1] * 3))
       }
     })
     return tempBlock
   }
-  const getBlockAddress=(address)=>{
-    var tempRow=Math.floor(address[0]/3+1)
-    var tempCol=Math.floor(address[1]/3+1)
-    return [tempRow,tempCol]
+  const getBlockAddress = (address) => {
+    var tempRow = Math.floor(address[0] / 3 + 1)
+    var tempCol = Math.floor(address[1] / 3 + 1)
+    return [tempRow, tempCol]
   }
-  const providerValue={selected,setSelected,value,setValue,getCol,getBlock,getBlockAddress,initialValue}
-  
-  // useMemo(()=>({
-  //   selected,setSelected,value,setValue
-  // }),[selected,value])
+  const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress, initialValue,solution,setSolution }
+
   return (
     <div className="App">
       <AppContext.Provider value={providerValue}>
