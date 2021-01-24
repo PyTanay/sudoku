@@ -6,12 +6,20 @@ function SingleBox(props) {
     const {selected,setSelected,value,getCol,getBlock,getBlockAddress,initialValue}= useContext(AppContext)
     const [address] = useState([props.row,props.col])
     var classList=["singleBox"]
+    //this is for original data - that can not be changed
+    if(initialValue.length>0){
+        if(initialValue[address[0]][address[1]]!==null){
+            // console.log(initialValue[address[0]][address[1]],address)
+            classList.push("disabledBox")
+        }
+    }
     //this adds class to display selected number
     if(selected.toString()===address.toString() && !classList.includes("selectedBox")){
         classList.push("selectedBox")
     }else{
         classList=classList.filter(elem=>elem!=="selectedBox")
     }
+
     //this adds class to display similar cells
     if(value[address[0]][address[1]]!==null && selected[0]!==undefined){
         if(value[address[0]][address[1]]===value[selected[0]][selected[1]] && address.toString()!==selected.toString()){
@@ -41,12 +49,6 @@ function SingleBox(props) {
         }else{
             classList=classList.filter(elem=>elem!=="dangerBox")
         }
-    }
-    //this is for original data - that can not be changed
-    if(value[address[0]][address[1]]===initialValue[address[0]][address[1]] && initialValue[address[0]][address[1]]!==null){
-        classList.push("disabledBox")
-    }else{
-        classList=classList.filter(elem=>elem!=="disabledBox")
     }
 
     return (

@@ -4,29 +4,62 @@ import './wholeGrid.css'
 import {AppContext} from '../App'
 
 function WholeGrid() {
-    const {selected,setSelected,value,setValue} = useContext(AppContext)
+    const {selected,setSelected,value,setValue,initialValue} = useContext(AppContext)
     useEffect(() => {
         const changeValue=(e)=>{
-            if(selected.length!==0){
+            if(selected.length!==0 && selected[0]!==undefined){
                 if(/[0-9]/.test(e.key)){
-                    var temp=value
+                    var temp=JSON.parse(JSON.stringify(value)) //this is necessary since we have 2d array and deep copy is needed
                     temp[selected[0]][selected[1]]=e.key
-                    setValue([...temp])
+                    setValue(temp)
                 }
                 const tempArr=['ArrowUp','ArrowLeft','ArrowDown','ArrowRight']
                 if(tempArr.includes(e.key)){
+                    e.preventDefault()
                     switch (e.key) {
                         case "ArrowUp":
-                            selected[0]!==0 && setSelected([selected[0]-1,selected[1]])
+                            var uptemp=1;
+                            if(selected[0]!==0){
+                                while (initialValue[selected[0]-uptemp][selected[1]]!==null) {
+                                    (selected[0]-uptemp===0)?uptemp=0:uptemp++;
+                                }
+                            }else{
+                                uptemp=0;
+                            }
+                            selected[0]!==0 && setSelected([selected[0]-uptemp,selected[1]])
                             break;
                         case "ArrowLeft":
-                            selected[1]!==0 && setSelected([selected[0],selected[1]-1])
+                            var lefttemp=1;
+                            if(selected[1]!==0){
+                                while (initialValue[selected[0]][selected[1]-lefttemp]!==null) {
+                                    (selected[1]-lefttemp===0) ? lefttemp=0 : lefttemp++
+                                }
+                            }else{
+                                lefttemp=0;
+                            }
+                            selected[1]!==0 && setSelected([selected[0],selected[1]-lefttemp])
                             break;
                         case "ArrowDown":
-                            selected[0]!==8 && setSelected([selected[0]+1,selected[1]])
+                            var downtemp=1;
+                            if(selected[0]!==8){
+                                while (initialValue[selected[0]+downtemp][selected[1]]!==null) {
+                                    (selected[0]+downtemp===8) ? downtemp=0 : downtemp++
+                                }
+                            }else{
+                                downtemp=0;
+                            }
+                            selected[0]!==8 && setSelected([selected[0]+downtemp,selected[1]])
                             break;
                         case "ArrowRight":
-                            selected[1]!==8 && setSelected([selected[0],selected[1]+1])
+                            var righttemp=1;
+                            if(selected[1]!==8){
+                                while (initialValue[selected[0]][selected[1]+righttemp]!==null) {
+                                    (selected[1]+righttemp===8)?righttemp=0:righttemp++;
+                                }
+                            }else{
+                                righttemp=0;
+                            }
+                            selected[1]!==8 && setSelected([selected[0],selected[1]+righttemp])
                             break;
                         default:
                             break;

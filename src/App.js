@@ -20,18 +20,16 @@ function App() {
       const tempData=res.database[randSelector].data
       if(tempData!==undefined){
         setInitialValue(res.database[randSelector].data)
-        setValue(res.database[randSelector].data)
       }
-    })
-    // .then(()=>{
-    //   // console.log(initialValue)
-    //   setValue(initialValue)
-    // })
-    .catch(err=>{console.log("File could not be loaded for some reason!",err)})
+    }).catch(err=>{console.log("File could not be loaded for some reason!",err)})
   }, [])
   const [selected, setSelected] = useState([undefined,undefined])
   const [value, setValue] = useState([[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null),[...Array(9)].fill(null)])
   const [initialValue, setInitialValue] = useState([])
+  useEffect(() => {
+    if(initialValue.length>0)
+    setValue([...initialValue])
+  }, [initialValue])
   const getCol=(col)=>{
     var tempCol=[]
     value.forEach(elem=>{tempCol.push(elem[col])})
@@ -51,7 +49,7 @@ function App() {
     var tempCol=Math.floor(address[1]/3+1)
     return [tempRow,tempCol]
   }
-  const providerValue={selected,setSelected,value,setValue,getCol,getBlock,getBlockAddress,initialValue,setInitialValue}
+  const providerValue={selected,setSelected,value,setValue,getCol,getBlock,getBlockAddress,initialValue}
   
   // useMemo(()=>({
   //   selected,setSelected,value,setValue
