@@ -12,7 +12,10 @@ export const AppContext = React.createContext();
 function App() {
   useEffect(() => {
     const clickChecker = (e) => {
-      (e.target.classList[0]!=="text1") && setSelected([undefined,undefined])
+      console.log(e.target.classList[0])
+      if(e.target.classList[0]!=="text1" && e.target.classList[0]!=="text"){
+        setSelected([undefined,undefined])
+      }
     }
     fetch('puzzleList.json', { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } })
       .then(res => {
