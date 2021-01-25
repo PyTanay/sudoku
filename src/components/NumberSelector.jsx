@@ -6,13 +6,15 @@ function NumberSelector(props) {
     const {value,setValue,selected}=useContext(AppContext)
     const onclick1=()=>{
         if(selected[0]>=0){
-            var temp=value;
+            var temp=JSON.parse(JSON.stringify(value))
             if(props.val>=0 && props.val<10){
-                temp[selected[0]][selected[1]]=props.val
+                temp[selected[0]][selected[1]]=props.val.toString()
             }else{
-                temp[selected[0]][selected[1]]=undefined
+                temp[selected[0]][selected[1]]=null
             }
-            setValue([...temp])
+            setValue(temp)
+        }else{
+            
         }
     }
     return (

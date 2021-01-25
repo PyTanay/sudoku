@@ -1,24 +1,30 @@
 import React,{useContext} from 'react'
 import {AppContext} from '../App'
-import { BiExport } from "react-icons/bi";
+import { BiExport,BiRefresh } from "react-icons/bi";
 import './utility.css';
+import Solve from './Solve';
 
 function Utility() {
-    const {value} = useContext(AppContext)
+    const {value,setValue,initialValue} = useContext(AppContext)
     const exportSudoku=()=>{
         const tempDate=new Date(Date.now())
-        console.log(tempDate.toLocaleString("en-GB"))
         const temp={
             creator:"Tanay",
             time:tempDate.toLocaleString("en-GB"),
             data:value
         }
-        console.log(Date.now())
         console.log(JSON.stringify(temp))
     }
+    const resetSudoku=()=>{
+        if(initialValue.length>0){
+            setValue(initialValue)
+        }
+    }
     return (
-        <div className="utility" onClick={exportSudoku}>
-            <button className="btn"><BiExport /> Export Sudoku</button>
+        <div className="utility" >
+            <button className="btn" onClick={exportSudoku}><BiExport /> Export Sudoku</button>
+            <button className="btn" onClick={resetSudoku}><BiRefresh /> Reset</button>
+            <Solve />
         </div>
     )
 }
