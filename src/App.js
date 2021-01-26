@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import axios from "axios"
 // import SingleBox from './components/SingleBox';
 // import OneRow from './components/OneRow';
 import WholeGrid from './components/WholeGrid';
@@ -39,6 +38,7 @@ function App() {
   const [value, setValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [initialValue, setInitialValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [solution, setSolution] = useState(Array(9).fill(Array(9).fill([])))
+  const [path, setPath] = useState([])
   useEffect(() => {
     if (initialValue.length > 0)
       setValue([...initialValue])
@@ -62,7 +62,8 @@ function App() {
     var tempCol = Math.floor(address[1] / 3 + 1)
     return [tempRow, tempCol]
   }
-  const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress, initialValue,solution,setSolution }
+  const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress,
+     initialValue,solution,setSolution,path,setPath }
 
   return (
     <div className="App">

@@ -1,11 +1,44 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext,useEffect, useRef} from 'react'
 import {AppContext} from '../App'
 import './singleBox.css'
+import confetti from 'canvas-confetti'
 
 function SingleBox(props) {
-    const {selected,setSelected,value,getCol,getBlock,getBlockAddress,initialValue}= useContext(AppContext)
+    const {selected,setSelected,value,getCol,getBlock,getBlockAddress,initialValue,path,setPath}= useContext(AppContext)
     const [address] = useState([props.row,props.col])
     var classList=["singleBox"]
+    const pervValueRef=useRef();
+    useEffect(() => {
+        pervValueRef.current=value
+    })
+    const prevValue=pervValueRef.current;
+    useEffect(() => {
+        if(prevValue!==undefined){
+            const currVal=value[props.row][props.col]
+            const prevVal=prevValue[props.row][props.col]
+            if(currVal!==prevVal && initialValue[props.row][props.col]===null){
+                const data={row:props.row,col:props.col,currVal,prevVal}
+                const tempPath=JSON.parse(JSON.stringify(path))
+                tempPath.push(data)
+                // console.log(tempPath)
+
+                
+                //add this confetti effect when user finishes the sudoku and solution is true
+                // confetti({
+                //     particleCount: 100,
+                //     startVelocity: 30,
+                //     spread: 360,
+                //     origin: {
+                //         x: Math.random(),
+                //         // since they fall down, start a bit higher than random
+                //         y: Math.random() - 0.2
+                //     }
+                // });
+                setPath(tempPath)
+                // console.log(`Address ${props.row},${props.col} changed from ${prevVal} to ${currVal}`)
+            }
+        }
+    }, [value])
     //this is for original data - that can not be changed
     if(initialValue.length>0){
         if(initialValue[address[0]][address[1]]!==null){

@@ -3,7 +3,7 @@ import { VscSettingsGear } from "react-icons/vsc";
 import { AppContext } from "../App";
 
 function Solve() {
-  const { value, setValue, setSolution, initialValue, getCol, getBlock, getBlockAddress } = useContext(AppContext);
+  const { value, setValue, initialValue, getCol, getBlock, getBlockAddress } = useContext(AppContext);
   const solveSudoku = () => {
     console.log("solving");
     var solMatrix = Array(9).fill(Array(9).fill([...Array(10).keys()].slice(1).map((elem) => elem.toString())));
@@ -17,12 +17,16 @@ function Solve() {
       solMatrix.forEach((row, rowIndex) => {
         var tempSol2=[];
         row.forEach((col, colIndex) => {
-          var filtRow = temp[rowIndex].filter((elem) => elem !== null);
-          var filtColumn = getCol(temp, colIndex).filter((elem) => elem !== null);
-          var filtBlock = getBlock(temp, getBlockAddress([rowIndex, colIndex])).filter((elem) => elem !== null);
-          var tempCell = col.filter((elem) => !filtRow.includes(elem));
-          tempCell = tempCell.filter((elem) => !filtColumn.includes(elem));
-          tempCell = tempCell.filter((elem) => !filtBlock.includes(elem));
+          if(initialValue[rowIndex][colIndex]===null){
+            var filtRow = temp[rowIndex].filter((elem) => elem !== null);
+            var filtColumn = getCol(temp, colIndex).filter((elem) => elem !== null);
+            var filtBlock = getBlock(temp, getBlockAddress([rowIndex, colIndex])).filter((elem) => elem !== null);
+            var tempCell = col.filter((elem) => !filtRow.includes(elem));
+            tempCell = tempCell.filter((elem) => !filtColumn.includes(elem));
+            tempCell = tempCell.filter((elem) => !filtBlock.includes(elem));
+          }else{
+            tempCell=[initialValue[rowIndex][colIndex]]
+          }
           tempSol2.push(JSON.parse(JSON.stringify(tempCell)))
           if (tempCell.length === 1 && temp[rowIndex][colIndex] === null) {
             temp[rowIndex][colIndex] = tempCell[0];
@@ -30,17 +34,31 @@ function Solve() {
         });
         tempSol[rowIndex]=JSON.parse(JSON.stringify(tempSol2));
       });
-      // console.log(tempSol)
-      tempSol.forEach(elem=>findUnique(elem))
+      console.log(tempSol)
+      tempSol.forEach((row,rowIndex)=>row.forEach((col,colIndex)=>{
+        var crossRef=findUniqueFromMatrix(col,tempSol,rowIndex,colIndex)
+        if(crossRef!==null && temp[rowIndex][colIndex]===null){
+          temp[rowIndex][colIndex] = crossRef;
+        }
+        // console.log(rowIndex,colIndex,findUniqueFromMatrix(col,tempSol,rowIndex,colIndex))
+      }))
       return temp;
     };
-    const findUnique = (arr1) => {
+    const findUniqueFromMatrix=(valArr,matrix,row,col)=>{
+      var tempMatrix=JSON.parse(JSON.stringify(matrix))
+      const rowResult=findUniqueFromArr(valArr,tempMatrix[row])
+      const colResult=findUniqueFromArr(valArr,getCol(tempMatrix,col))
+      const blockResult=findUniqueFromArr(valArr,getBlock(tempMatrix, getBlockAddress([row,col])))
+      // console.log(rowResult?rowResult: colResult ? colResult : blockResult ? blockResult : null,row,col)
+      return rowResult?rowResult: colResult ? colResult : blockResult ? blockResult : null
+    }
+    const findUniqueFromArr = (valArr,arr1) => {
       var ret = JSON.parse(JSON.stringify(arr1));
       var temp=[];
       ret.forEach(elem=>elem.forEach(ele=>temp.push(ele)))
-      console.log(temp.filter(elem=>temp.filter(e=>e===elem).length===1))
-      ret.map(elem=>elem.filter(elem1=>temp.filter(elem2=>elem2===elem1).length===1))
-      return ret;
+      var uniqDigit=[];
+      valArr.forEach(elem=>temp.filter(e=>e===elem).length===1 && uniqDigit.push(elem))
+      return uniqDigit.toString();
     };
     setValue(methodA(value));
   };
