@@ -16,6 +16,7 @@ function App() {
         setSelected([undefined,undefined])
       }
     }
+    
     fetch('puzzleList.json', { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } })
       .then(res => {
         return res.json()
@@ -37,6 +38,7 @@ function App() {
   const [value, setValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [initialValue, setInitialValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [solution, setSolution] = useState(Array(9).fill(Array(9).fill([])))
+  const [path, setPath] = useState([])
   useEffect(() => {
     if (initialValue.length > 0)
       setValue([...initialValue])
@@ -60,7 +62,8 @@ function App() {
     var tempCol = Math.floor(address[1] / 3 + 1)
     return [tempRow, tempCol]
   }
-  const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress, initialValue,solution,setSolution }
+  const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress,
+     initialValue,solution,setSolution,path,setPath }
 
   return (
     <div className="App">
