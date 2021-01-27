@@ -40,3 +40,10 @@
   background-color: rgb(56, 125, 204);
   cursor: pointer;
 }
+/* this is for the styling of the tooltip */
+.numberSelector>div>div{
+  height: 1vw;
+  margin-top: 0px;
+  line-height: 1vw;
+  font-size: 10px;
+}

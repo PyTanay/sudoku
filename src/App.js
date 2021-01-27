@@ -12,7 +12,6 @@ export const AppContext = React.createContext();
 function App() {
   useEffect(() => {
     const clickChecker = (e) => {
-      console.log(e.target.classList[0])
       if(e.target.classList[0]!=="text1" && e.target.classList[0]!=="text"){
         setSelected([undefined,undefined])
       }

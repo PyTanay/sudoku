@@ -7,7 +7,6 @@ function Solve() {
   const solveSudoku = () => {
     console.log("solving");
     var solMatrix = Array(9).fill(Array(9).fill([...Array(10).keys()].slice(1).map((elem) => elem.toString())));
-
     //there are two solution methods and in order to solve sudoku both method needs to be implemented mulltiple times
     //methodA --> checks the cell against row column and blocks and figures which solutions are possible for the cell
     //methodB --> checks the cell solutions based on the other for related blocks
@@ -22,14 +21,11 @@ function Solve() {
           var tempCell = col.filter((elem) => !filtRow.includes(elem));
           tempCell = tempCell.filter((elem) => !filtColumn.includes(elem));
           tempCell = tempCell.filter((elem) => !filtBlock.includes(elem));
-        //   tempSol[rowIndex][colIndex]=tempCell
           if (tempCell.length === 1 && temp[rowIndex][colIndex] === null) {
             temp[rowIndex][colIndex] = tempCell[0];
           }
         });
       });
-    //   console.log(tempSol)
-    //   tempSol.forEach(elem=>findUnique(elem))
       return temp;
     };
     const findUnique = (arr1) => {
