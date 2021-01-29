@@ -8,7 +8,7 @@ function WholeGrid() {
     useEffect(() => {
         const changeValue=(e)=>{
             if(selected.length!==0 && selected[0]!==undefined){
-                if(/[0-9]/.test(e.key)){
+                if(/[1-9]/.test(e.key)){
                     var temp=JSON.parse(JSON.stringify(value)) //this is necessary since we have 2d array and deep copy is needed
                     temp[selected[0]][selected[1]]=e.key
                     setValue(temp)

@@ -1,0 +1,26 @@
+.pillBox {
+  display: block;
+  margin: auto;
+  border: 2px rgb(70, 165, 136) solid;
+  /* background-color: rgb(48, 112, 93); */
+  border-radius: 3vh;
+  width: fit-content;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  height: 4vh;
+  color: white;
+  line-height: 4vh;
+  font-size: 1vw;
+  font-weight: 600;
+  transition-duration: 0.5s;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+}
+.pillBox:hover {
+  background-color: rgb(37, 87, 72);
+}
+@media only screen and (max-width: 600px) {
+  .pillBox {
+    font-size: 2.5vw;
+  }
+}

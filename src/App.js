@@ -7,6 +7,7 @@ import WholeGrid from './components/WholeGrid';
 import AllNumSel from './components/AllNumSel';
 import React, { useState, useEffect } from 'react';
 import Utility from './components/Utility';
+import TimerBox from './components/TimerBox';
 export const AppContext = React.createContext();
 
 function App() {
@@ -38,7 +39,10 @@ function App() {
   const [value, setValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [initialValue, setInitialValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [solution, setSolution] = useState(Array(9).fill(Array(9).fill(null)))
+  const [displayError, setDisplayError] = useState(false)
   const [path, setPath] = useState([])
+  const [timerMethods, setTimerMethods] = useState({})
+  
   useEffect(() => {
     if (initialValue.length > 0)
       setValue([...initialValue])
@@ -63,7 +67,7 @@ function App() {
     return [tempRow, tempCol]
   }
   const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress,
-     initialValue,solution,setSolution,path,setPath }
+     initialValue,solution,setSolution,path,setPath,displayError, setDisplayError,timerMethods, setTimerMethods}
 
   return (
     <div className="App">
@@ -73,10 +77,13 @@ function App() {
           <h1 className="title">Sudoku</h1>
           <img src={logo} className="App-logo" alt="logo" />
         </div>
+        <div className="iconBar">
+          <TimerBox />
+        </div>
         <div className="mainGame">
           <WholeGrid />
           <AllNumSel />
-          <Utility />
+          {/* <Utility /> */}
         </div>
       </AppContext.Provider>
     </div>

@@ -3,12 +3,12 @@
 }
 .hLine {
   margin: auto;
-  width: 53%;
+  width: 65%;
   height: 3px;
   background-color: rgb(19, 97, 243);
 }
 @media only screen and (max-width: 600px) {
   .hLine {
-    width: 83%;
+    width: 92%;
   }
 }

@@ -20,6 +20,7 @@
   }
   .btn {
     width: 40vw;
+    margin: 5px;
     height: 10vw;
     font-size: 4vw;
   }

@@ -3,14 +3,10 @@ import { FiCheckCircle } from "react-icons/fi";
 import { AppContext } from "../App";
 
 function Solve() {
-  const { value, initialValue, getCol, getBlock, getBlockAddress,solution,setSolution } = useContext(AppContext);
+  const { value, getCol, getBlock, getBlockAddress,solution,setSolution, setDisplayError } = useContext(AppContext);
   const [solving, setSolving] = useState(false)
   const [counter, setCounter] = useState(1)
-  const strArr=["1","2","3","4","5","6","7","8","9"]
   const [solMatrix, setSolMatrix] = useState(Array.from({length: 9},()=> Array.from({length: 9}, () => Array.from("123456789"))))
-  // var solMatrix=Array(9).fill(Array(9).fill([...Array(10).keys()].slice(1).map((elem) => elem.toString())))
-  // console.log(Array.from({length: 9},()=> Array.from({length: 9}, () => Array.from("123456789"))))
-  // console.log("States initialized",solMatrix)
 
   const solveSudoku =() => {
     setSolving(true)
@@ -28,7 +24,8 @@ function Solve() {
       setCounter(counter+1)
     }else if(isFinished(solution)===true){
       console.log("Sudoku successfully solved")
-      console.log(solution)
+      // console.log(solution)
+      setSolution(solution)
       setSolving(false)
       setCounter(1)
     }else if(counter===20){
@@ -147,7 +144,10 @@ function Solve() {
     return uniqDigit.toString();
   };
   const checkSudoku=()=>{
-    console.log("Checking Sudoku...")
+    setDisplayError(true)
+    setTimeout(()=>{
+      setDisplayError(false)
+    },2000)
   }
   return (
     <button className="btn" onClick={checkSudoku}>

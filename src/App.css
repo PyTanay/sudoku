@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
-  /* height: 100vh; */
+  min-height: 100vh;
 }
 .appHeader {
   display: flex;
@@ -9,7 +9,7 @@
 }
 .mainGame {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 60% 40%;
 }
 @media only screen and (max-width: 600px) {
   .mainGame {
@@ -21,7 +21,6 @@ h1.title {
   font-size: 7vmin;
   padding: 0px;
   margin: 0px;
-  margin-bottom: 20px;
 }
 .App-logo {
   height: 10vmin;

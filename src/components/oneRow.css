@@ -6,11 +6,11 @@
 .vLine {
   position: relative;
   width: 3px;
-  height: 4vw;
+  height: 4.3vw;
   background-color: rgb(19, 97, 243);
 }
 @media only screen and (max-width: 600px) {
   .vLine {
-    height: 8.9vw;
+    height: 10vw;
   }
 }

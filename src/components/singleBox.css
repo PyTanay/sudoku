@@ -1,6 +1,7 @@
 .singleBox {
-  --x: 5.5%;
+  --x: 6.5%;
   background-color: #2f333b;
+  border: 2px solid#2f333b;
   border-radius: 2px;
   width: var(--x);
   padding-top: var(--x);
@@ -19,12 +20,14 @@
   }
 }
 .singleBox:hover {
+  border-color: rgb(100, 100, 100);
   background-color: rgb(100, 100, 100);
 }
 .singleBox:active {
   background-color: rgb(75, 75, 75);
 }
 .disabledBox {
+  border: 2px solid rgb(59, 59, 59);
   background-color: rgb(59, 59, 59);
   transition: 0.2s ease-in;
   pointer-events: none;
@@ -35,19 +38,21 @@
   cursor: -webkit-grab;
 }
 .selectedBox {
+  border: 2px solid rgb(45, 111, 235);
   background-color: rgb(45, 111, 235);
-  transition: 0.2s ease-in;
-  animation: circle 0.2s cubic-bezier(0.41, 0.51, 0.24, 2.82) forwards;
+  transition: 0.1s ease-in;
+  /* animation: circle 0.2s cubic-bezier(0.41, 0.51, 0.24, 2.82) forwards; */
 }
 @keyframes circle {
   0% {
-    clip-path: circle(70% at 50% 50%);
+    clip-path: circle(0% at 50% 50%);
   }
   100% {
-    clip-path: circle(45% at 50% 50%);
+    clip-path: circle(40% at 50% 50%);
   }
 }
 .selectedBox:hover {
+  border-color: rgb(38, 81, 199);
   background-color: rgb(38, 81, 199);
 }
 .text1 {
@@ -67,18 +72,37 @@
   cursor: pointer;
 }
 .similarBox {
-  background-color: rgb(76, 83, 50);
+  border: 2px solid rgb(78, 92, 28);
+  background-color: rgb(78, 92, 28);
   transition: 0.2s ease-in;
-  animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
+  animation: circle 0.5s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
 }
 .similarBox:hover {
   background-color: rgb(57, 61, 41);
 }
 .dangerBox {
-  background-color: rgb(141, 45, 45);
+  border: 2px solid rgb(119, 57, 57);
+  background-color: rgb(119, 57, 57);
   transition: 0.2s ease-in;
-  animation: circle 0.3s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
+  animation: circle 0.5s cubic-bezier(0.41, 0.51, 0.24, 1.82) forwards;
 }
 .dangerBox:hover {
   background-color: rgb(83, 27, 27);
+}
+.errorBox {
+  /* background-color: rgb(245, 87, 87); */
+  border: 2px solid rgb(245, 87, 87);
+  transition: 0.2s ease-in;
+  animation: blink 0.5s linear forwards 2;
+}
+@keyframes blink {
+  50% {
+    background-color: rgb(245, 87, 87);
+  }
+  100% {
+    background-color: #2f333b;
+  }
+}
+.errorBox:hover {
+  background-color: rgb(172, 49, 49);
 }

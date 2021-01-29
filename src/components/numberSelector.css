@@ -3,17 +3,18 @@
   background-color: #282c34;
   border: 2px rgb(56, 125, 204) solid;
   border-radius: 100%;
-  margin: 10px;
+  margin: 5px;
   width: var(--x);
   height: var(--x);
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 2%;
+  margin-right: 2%;
   position: relative;
   transition: 0.2s ease-in-out;
 }
 @media only screen and (max-width: 600px) {
   .numberSelector {
-    --x: 12vw;
+    --x: 10vw;
+    border-radius: 10%;
     margin-left: 2%;
     margin-right: 2%;
   }
@@ -41,7 +42,7 @@
   cursor: pointer;
 }
 /* this is for the styling of the tooltip */
-.numberSelector>div>div{
+.numberSelector > div > div {
   height: 1vw;
   margin-top: 0px;
   line-height: 1vw;
