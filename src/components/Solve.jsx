@@ -6,7 +6,12 @@ function Solve() {
   const { value, initialValue, getCol, getBlock, getBlockAddress,solution,setSolution } = useContext(AppContext);
   const [solving, setSolving] = useState(false)
   const [counter, setCounter] = useState(1)
-  const [solMatrix, setSolMatrix] = useState(Array(9).fill(Array(9).fill([...Array(10).keys()].slice(1).map((elem) => elem.toString()))))
+  const strArr=["1","2","3","4","5","6","7","8","9"]
+  const [solMatrix, setSolMatrix] = useState(Array.from({length: 9},()=> Array.from({length: 9}, () => Array.from("123456789"))))
+  // var solMatrix=Array(9).fill(Array(9).fill([...Array(10).keys()].slice(1).map((elem) => elem.toString())))
+  // console.log(Array.from({length: 9},()=> Array.from({length: 9}, () => Array.from("123456789"))))
+  // console.log("States initialized",solMatrix)
+
   const solveSudoku =() => {
     setSolving(true)
     setSolution(methodA(value))
@@ -18,11 +23,12 @@ function Solve() {
   },[])
   useEffect(() => {
     if(isFinished(solution)===false && counter<20 && solving===true){
+      // console.log(solMatrix,"Iteration",counter)
       setSolution(methodA(solution))
       setCounter(counter+1)
     }else if(isFinished(solution)===true){
       console.log("Sudoku successfully solved")
-      // console.log(solution)
+      console.log(solution)
       setSolving(false)
       setCounter(1)
     }else if(counter===20){
@@ -49,9 +55,9 @@ function Solve() {
   //methodA --> checks the cell against row column and blocks and figures which solutions are possible for the cell
   //methodB --> checks the cell solutions based on the other for related blocks
   const methodA =(startPoint) => {
-    // var solMatrix = Array(9).fill(Array(9).fill([...Array(10).keys()].slice(1).map((elem) => elem.toString())));
     var temp = JSON.parse(JSON.stringify(startPoint));
     var tempSol = Array(9).fill([]);
+    // console.log(solMatrix)
     solMatrix.forEach((row, rowIndex) => {
       var tempSol2 = [];
       row.forEach((col, colIndex) => {
@@ -73,46 +79,55 @@ function Solve() {
       tempSol[rowIndex] = JSON.parse(JSON.stringify(tempSol2));
     });
     
-    tempSol.forEach((row, rowIndex) =>
-    row.forEach((col, colIndex) => {
-      var crossRef = findUniqueFromMatrix(col, tempSol, rowIndex, colIndex);
-      if (crossRef !== null && temp[rowIndex][colIndex] === null) {
-        temp[rowIndex][colIndex] = crossRef;
-        tempSol[rowIndex][colIndex]=[crossRef]
-      }
-      // console.log(rowIndex,colIndex,findUniqueFromMatrix(col,tempSol,rowIndex,colIndex))
-    })
-    );
-    
-    console.log(tempSol.map(elem=>elem.map(elem1=>elem1.toString()))) //uncomment this if solution matrix is needed
-    setSolMatrix(tempSol)
-    cleanUpSolMatrix(solMatrix)
+    tempSol.forEach((row, rowIndex) =>{
+      row.forEach((col, colIndex) => {
+        var crossRef = findUniqueFromMatrix(col, tempSol, rowIndex, colIndex);
+        if (crossRef !== null && temp[rowIndex][colIndex] === null) {
+          temp[rowIndex][colIndex] = crossRef;
+          tempSol[rowIndex][colIndex]=[crossRef]
+        }
+        // console.log(rowIndex,colIndex,findUniqueFromMatrix(col,tempSol,rowIndex,colIndex))
+      })
+    });
+    cleanUpSolMatrix(tempSol)
     return temp;
   };
   const cleanUpSolMatrix=(matrix)=>{
     var tempMatrix=JSON.parse(JSON.stringify(matrix));
-    tempMatrix.map((row,rowIndex)=>{
-      return row.map((col,colIndex)=>{
+    tempMatrix.forEach((row,rowIndex)=>{
+      row.forEach((col,colIndex)=>{
+        // var col=JSON.parse(JSON.stringify(col))
         const rowArr = tempMatrix[rowIndex];
         const colArr = getCol(tempMatrix, colIndex);
         const blockArr = getBlock(tempMatrix, getBlockAddress([rowIndex, colIndex]));
+        // console.log("Address",rowIndex,colIndex)
         col=findUniquePair(col,rowArr)
         col=findUniquePair(col,colArr)
         col=findUniquePair(col,blockArr)
-        return col
+        tempMatrix[rowIndex][colIndex]=col
       })
     })
-    console.log(tempMatrix.map(elem=>elem.map(elem1=>elem1.toString())))
+    // console.log(tempMatrix.map(elem=>elem.map(elem1=>elem1.toString())))
+    setSolMatrix(tempMatrix)
+    // console.log(solMatrix.map(elem=>elem.map(elem1=>elem1.toString())))
+
+    // solMatrix=tempMatrix
   }
   const findUniquePair=(valArr,arr1)=>{
     var tempArr=JSON.parse(JSON.stringify(valArr))
+    var temp=[]
     arr1.forEach(elem=>{
-      if(elem.length===2 && arr1.filter(elem1=>elem1===elem).length===2){
-        if(elem!==tempArr){
-          tempArr=tempArr.filter(elem2=>elem2!==elem[0]).filter(elem3=>elem3!==elem[1])
+      if(elem.length===2 && arr1.filter(elem1=>elem1.toString()===elem.toString()).length===2){
+        if(elem.toString()!==tempArr.toString()){
+          if(!temp.includes(elem[0]) && !temp.includes(elem[1])){
+            temp.push(elem[0])
+            temp.push(elem[1])
+          }
         }
       }
     })
+    // console.log(temp)
+    tempArr=tempArr.filter(elem2=>!temp.includes(elem2))
     return tempArr
   }
   const findUniqueFromMatrix = (valArr, matrix, row, col) => {
@@ -131,8 +146,11 @@ function Solve() {
     valArr.forEach((elem) => temp.filter((e) => e === elem).length === 1 && uniqDigit.push(elem));
     return uniqDigit.toString();
   };
+  const checkSudoku=()=>{
+    console.log("Checking Sudoku...")
+  }
   return (
-    <button className="btn" onClick={solveSudoku}>
+    <button className="btn" onClick={checkSudoku}>
       <FiCheckCircle /> Check
     </button>
   );
