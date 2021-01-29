@@ -37,7 +37,7 @@ function App() {
   const [selected, setSelected] = useState([undefined, undefined])
   const [value, setValue] = useState(Array(9).fill(Array(9).fill(null)))
   const [initialValue, setInitialValue] = useState(Array(9).fill(Array(9).fill(null)))
-  const [solution, setSolution] = useState(Array(9).fill(Array(9).fill([])))
+  const [solution, setSolution] = useState(Array(9).fill(Array(9).fill(null)))
   const [path, setPath] = useState([])
   useEffect(() => {
     if (initialValue.length > 0)
