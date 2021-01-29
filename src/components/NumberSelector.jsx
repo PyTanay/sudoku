@@ -11,7 +11,7 @@ function NumberSelector(props) {
             // console.log(props.val.type.name)
             if(props.val>=0 && props.val<10){
                 temp[selected[0]][selected[1]]=props.val.toString()
-            }else if(props.val.type.name==="BiEraser"){
+            }else if(props.val.props.tip==="Delete"){
                 temp[selected[0]][selected[1]]=null
             }else{
                 // temp[selected[0]][selected[1]]=null
