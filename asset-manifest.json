@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/PyTanay/sudoku/static/css/main.6d3ed85a.chunk.css",
-    "main.js": "/PyTanay/sudoku/static/js/main.9c0d343c.chunk.js",
-    "main.js.map": "/PyTanay/sudoku/static/js/main.9c0d343c.chunk.js.map",
-    "runtime-main.js": "/PyTanay/sudoku/static/js/runtime-main.9e117ad9.js",
-    "runtime-main.js.map": "/PyTanay/sudoku/static/js/runtime-main.9e117ad9.js.map",
-    "static/js/2.f15c0dc8.chunk.js": "/PyTanay/sudoku/static/js/2.f15c0dc8.chunk.js",
-    "static/js/2.f15c0dc8.chunk.js.map": "/PyTanay/sudoku/static/js/2.f15c0dc8.chunk.js.map",
-    "static/js/3.5f0ae4c6.chunk.js": "/PyTanay/sudoku/static/js/3.5f0ae4c6.chunk.js",
-    "static/js/3.5f0ae4c6.chunk.js.map": "/PyTanay/sudoku/static/js/3.5f0ae4c6.chunk.js.map",
-    "index.html": "/PyTanay/sudoku/index.html",
-    "static/css/main.6d3ed85a.chunk.css.map": "/PyTanay/sudoku/static/css/main.6d3ed85a.chunk.css.map",
-    "static/js/2.f15c0dc8.chunk.js.LICENSE.txt": "/PyTanay/sudoku/static/js/2.f15c0dc8.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/PyTanay/sudoku/static/media/logo.6ce24c58.svg"
+    "main.css": "/sudoku/static/css/main.e78e34e4.chunk.css",
+    "main.js": "/sudoku/static/js/main.e2b191c2.chunk.js",
+    "main.js.map": "/sudoku/static/js/main.e2b191c2.chunk.js.map",
+    "runtime-main.js": "/sudoku/static/js/runtime-main.16bac592.js",
+    "runtime-main.js.map": "/sudoku/static/js/runtime-main.16bac592.js.map",
+    "static/js/2.f15c0dc8.chunk.js": "/sudoku/static/js/2.f15c0dc8.chunk.js",
+    "static/js/2.f15c0dc8.chunk.js.map": "/sudoku/static/js/2.f15c0dc8.chunk.js.map",
+    "static/js/3.5f0ae4c6.chunk.js": "/sudoku/static/js/3.5f0ae4c6.chunk.js",
+    "static/js/3.5f0ae4c6.chunk.js.map": "/sudoku/static/js/3.5f0ae4c6.chunk.js.map",
+    "index.html": "/sudoku/index.html",
+    "static/css/main.e78e34e4.chunk.css.map": "/sudoku/static/css/main.e78e34e4.chunk.css.map",
+    "static/js/2.f15c0dc8.chunk.js.LICENSE.txt": "/sudoku/static/js/2.f15c0dc8.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/sudoku/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9e117ad9.js",
+    "static/js/runtime-main.16bac592.js",
     "static/js/2.f15c0dc8.chunk.js",
-    "static/css/main.6d3ed85a.chunk.css",
-    "static/js/main.9c0d343c.chunk.js"
+    "static/css/main.e78e34e4.chunk.css",
+    "static/js/main.e2b191c2.chunk.js"
   ]
 }
