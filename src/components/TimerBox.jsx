@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from 'react'
+import React,{useContext} from 'react'
 import './timerBox.css'
 import Timer from  'react-compound-timer'
 import {AppContext} from '../App'

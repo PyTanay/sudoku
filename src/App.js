@@ -6,7 +6,7 @@ import WholeGrid from './components/WholeGrid';
 // import NumberSelector from './components/NumberSelector';
 import AllNumSel from './components/AllNumSel';
 import React, { useState, useEffect } from 'react';
-import Utility from './components/Utility';
+// import Utility from './components/Utility';
 import TimerBox from './components/TimerBox';
 import Popup from 'react-popup';
 import './components/popUp.css'

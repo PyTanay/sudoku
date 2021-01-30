@@ -2,7 +2,6 @@ import React, { useContext,useEffect,useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { AppContext } from "../App";
 import confetti from 'canvas-confetti'
-import Timer from "react-compound-timer/build";
 
 function Solve() {
   const { value,initialValue, getCol, getBlock, getBlockAddress,solution,setSolution, setDisplayError,Popup,timerMethods,time } = useContext(AppContext);
@@ -26,7 +25,6 @@ function Solve() {
       setCounter(counter+1)
     }else if(isFinished(solution)===true){
       console.log("Sudoku successfully solved")
-      console.log(solution)
       setSolution(solution)
       // Popup.alert("Congratulations Sudoku was solved by computer.")
       setSolving(false)
