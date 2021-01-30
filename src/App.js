@@ -5,7 +5,7 @@ import './App.css';
 import WholeGrid from './components/WholeGrid';
 // import NumberSelector from './components/NumberSelector';
 import AllNumSel from './components/AllNumSel';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 // import Utility from './components/Utility';
 import TimerBox from './components/TimerBox';
 import Popup from 'react-popup';
@@ -45,8 +45,10 @@ function App() {
   const [solution, setSolution] = useState(Array(9).fill(Array(9).fill(null)))
   const [displayError, setDisplayError] = useState(false)
   const [path, setPath] = useState([])
-  const [timerMethods, setTimerMethods] = useState({})
-  const [time, setTime] = useState({hour:0,min:0,sec:0})
+  // const [timerMethods, setTimerMethods] = useState({})
+  // const [time, setTime] = useState({hour:0,min:0,sec:0})
+  const timerControls = useRef({})
+  const timeValue = useRef({hour:0,min:0,sec:0})
   
   useEffect(() => {
     if (initialValue.length > 0)
@@ -73,8 +75,8 @@ function App() {
   }
   
   const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress,
-     initialValue,solution,setSolution,path,setPath,displayError, setDisplayError,timerMethods, setTimerMethods,Popup,
-    time,setTime}
+     initialValue,solution,setSolution,path,setPath,displayError, setDisplayError,Popup,
+    timerControls,timeValue}
 
   return (
     <div className="App">

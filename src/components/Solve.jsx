@@ -4,7 +4,7 @@ import { AppContext } from "../App";
 import confetti from 'canvas-confetti'
 
 function Solve() {
-  const { value,initialValue, getCol, getBlock, getBlockAddress,solution,setSolution, setDisplayError,Popup,timerMethods,time } = useContext(AppContext);
+  const { value,initialValue, getCol, getBlock, getBlockAddress,solution,setSolution, setDisplayError,Popup,timerControls,timeValue } = useContext(AppContext);
   const [solving, setSolving] = useState(false)
   const [counter, setCounter] = useState(1)
   const [solMatrix, setSolMatrix] = useState(Array.from({length: 9},()=> Array.from({length: 9}, () => Array.from("123456789"))))
@@ -26,7 +26,7 @@ function Solve() {
     }else if(isFinished(solution)===true){
       console.log("Sudoku successfully solved")
       setSolution(solution)
-      // Popup.alert("Congratulations Sudoku was solved by computer.")
+      console.log(solution)
       setSolving(false)
       setCounter(1)
     }else if(counter===20){
@@ -54,11 +54,11 @@ function Solve() {
       for(var i=0;i<6;i++){
         setTimeout(()=>confetti({particleCount: 100,startVelocity: 30,spread: 360,origin: {x: Math.random(),y: Math.random() - 0.2}}),500*i)
       }
-      timerMethods.pause()
+      timerControls.current.pause()
       setTimeout(() => {
         Popup.create({
           title: 'Congratualtions!!!',
-          content: `You finished the sudoku correctly in ${time.hour!==0?time.hour+" h":""} ${time.min!==0?time.min+" m":""} ${time.sec!==0?time.sec+" s":""}`,
+          content: `You finished the sudoku correctly in ${timeValue.current.hour!==0?timeValue.current.hour+" h":""} ${timeValue.current.min!==0?timeValue.current.min+" m":""} ${timeValue.current.sec+" s"}`,
           buttons: {
               left: [{
                   text: 'Cancel',
@@ -80,7 +80,7 @@ function Solve() {
             }]
             }
         })
-      }, 2000);
+      }, 1000);
     }
   }
   useEffect(() => {
