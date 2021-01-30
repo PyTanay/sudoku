@@ -4,7 +4,7 @@ import './numberSelector.css'
 import ReactTooltip from 'react-tooltip';
 
 function NumberSelector(props) {
-    const {value,setValue,selected}=useContext(AppContext)
+    const {value,setValue,selected, setHighlight}=useContext(AppContext)
     const onclick1=()=>{
         if(selected[0]>=0){
             var temp=JSON.parse(JSON.stringify(value))
@@ -13,12 +13,13 @@ function NumberSelector(props) {
                 temp[selected[0]][selected[1]]=props.val.toString()
             }else if(props.val.props.tip==="Delete"){
                 temp[selected[0]][selected[1]]=null
-            }else{
+            }else{ //add the methods to go back and forward here
                 // temp[selected[0]][selected[1]]=null
             }
             setValue(temp)
+            setHighlight(null)
         }else{
-            
+            setHighlight(props.val.toString())
         }
     }
     const dataTip=(props.val>=0 && props.val<10) ? null : props.val.props.tip

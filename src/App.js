@@ -19,6 +19,7 @@ function App() {
     const clickChecker = (e) => {
       if(e.target.classList[0]!=="text1" && e.target.classList[0]!=="text"){
         setSelected([undefined,undefined])
+        setHighlight(null)
       }
     }
     
@@ -27,7 +28,8 @@ function App() {
         return res.json()
       })
       .then(res => {
-        const randSelector = Math.floor(Math.random() * res.database.length)
+        const randSelector=6
+        // const randSelector = Math.floor(Math.random() * res.database.length)
         const tempData = res.database[randSelector].data
         if (tempData !== undefined) {
           setInitialValue(res.database[randSelector].data)
@@ -45,6 +47,7 @@ function App() {
   const [solution, setSolution] = useState(Array(9).fill(Array(9).fill(null)))
   const [displayError, setDisplayError] = useState(false)
   const [path, setPath] = useState([])
+  const [highlight, setHighlight] = useState(null)
   // const [timerMethods, setTimerMethods] = useState({})
   // const [time, setTime] = useState({hour:0,min:0,sec:0})
   const timerControls = useRef({})
@@ -76,7 +79,7 @@ function App() {
   
   const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress,
      initialValue,solution,setSolution,path,setPath,displayError, setDisplayError,Popup,
-    timerControls,timeValue}
+    timerControls,timeValue,highlight, setHighlight}
 
   return (
     <div className="App">

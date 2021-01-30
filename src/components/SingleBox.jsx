@@ -3,7 +3,7 @@ import { AppContext } from "../App";
 import "./singleBox.css";
 
 function SingleBox(props) {
-  const { selected, setSelected, value, getCol, getBlock, getBlockAddress, initialValue, path, setPath, solution,displayError } = useContext(
+  const { selected, setSelected, value, getCol, getBlock, getBlockAddress, initialValue, path, setPath, solution,displayError,highlight } = useContext(
     AppContext
   );
   const [address] = useState([props.row, props.col]);
@@ -49,10 +49,7 @@ function SingleBox(props) {
     value[address[0]][address[1]] !== null &&
     !classList.includes("errorBox") &&
     !classList.includes("disabledBox")) {
-    // console.log("Pushing error box");
-    // classList=classList.filter(elem=>elem!=="")
     classList.push("errorBox");
-    // console.log(classList);
   } else {
     classList = classList.filter((elem) => elem !== "errorBox");
   }
@@ -113,6 +110,10 @@ function SingleBox(props) {
     } else {
       classList = classList.filter((elem) => elem !== "dangerBox");
     }
+  }
+  //highlight numbers based on the numberBox selection
+  if(highlight!==null && value[address[0]][address[1]]===highlight){
+    classList.push("similarBox")
   }
 
   return (
