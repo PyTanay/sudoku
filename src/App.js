@@ -8,7 +8,11 @@ import AllNumSel from './components/AllNumSel';
 import React, { useState, useEffect } from 'react';
 import Utility from './components/Utility';
 import TimerBox from './components/TimerBox';
+import Popup from 'react-popup';
+import './components/popUp.css'
+
 export const AppContext = React.createContext();
+
 
 function App() {
   useEffect(() => {
@@ -42,11 +46,12 @@ function App() {
   const [displayError, setDisplayError] = useState(false)
   const [path, setPath] = useState([])
   const [timerMethods, setTimerMethods] = useState({})
+  const [time, setTime] = useState({hour:0,min:0,sec:0})
   
   useEffect(() => {
     if (initialValue.length > 0)
       setValue([...initialValue])
-  }, [initialValue])
+    }, [initialValue])
   const getCol = (matrix,col) => {
     var tempCol = []
     matrix.forEach(elem => { tempCol.push(elem[col]) })
@@ -66,11 +71,15 @@ function App() {
     var tempCol = Math.floor(address[1] / 3 + 1)
     return [tempRow, tempCol]
   }
+  
   const providerValue = { selected, setSelected, value, setValue, getCol, getBlock, getBlockAddress,
-     initialValue,solution,setSolution,path,setPath,displayError, setDisplayError,timerMethods, setTimerMethods}
+     initialValue,solution,setSolution,path,setPath,displayError, setDisplayError,timerMethods, setTimerMethods,Popup,
+    time,setTime}
 
   return (
     <div className="App">
+      <Popup />
+      {document.getElementById('popupContainer')}
       <AppContext.Provider value={providerValue}>
         <div className="appHeader">
           <img src={logo} className="App-logo" alt="logo" />

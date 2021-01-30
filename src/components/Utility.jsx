@@ -4,8 +4,9 @@ import { BiExport,BiRefresh } from "react-icons/bi";
 import './utility.css';
 import Solve from './Solve';
 
+
 function Utility() {
-    const {value,setValue,initialValue,timerMethods} = useContext(AppContext)
+    const {value,setValue,initialValue,timerMethods,Popup,time} = useContext(AppContext)
     const exportSudoku=()=>{
         const tempDate=new Date(Date.now())
         const temp={
@@ -19,6 +20,7 @@ function Utility() {
         if(initialValue.length>0){
             setValue(initialValue)
             timerMethods.reset()
+            timerMethods.start()
         }
     }
     return (

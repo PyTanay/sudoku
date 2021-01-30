@@ -1,9 +1,11 @@
 import React, { useContext,useEffect,useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { AppContext } from "../App";
+import confetti from 'canvas-confetti'
+import Timer from "react-compound-timer/build";
 
 function Solve() {
-  const { value, getCol, getBlock, getBlockAddress,solution,setSolution, setDisplayError } = useContext(AppContext);
+  const { value,initialValue, getCol, getBlock, getBlockAddress,solution,setSolution, setDisplayError,Popup,timerMethods,time } = useContext(AppContext);
   const [solving, setSolving] = useState(false)
   const [counter, setCounter] = useState(1)
   const [solMatrix, setSolMatrix] = useState(Array.from({length: 9},()=> Array.from({length: 9}, () => Array.from("123456789"))))
@@ -24,8 +26,9 @@ function Solve() {
       setCounter(counter+1)
     }else if(isFinished(solution)===true){
       console.log("Sudoku successfully solved")
-      // console.log(solution)
+      console.log(solution)
       setSolution(solution)
+      // Popup.alert("Congratulations Sudoku was solved by computer.")
       setSolving(false)
       setCounter(1)
     }else if(counter===20){
@@ -40,6 +43,61 @@ function Solve() {
     }
   }, [solution])
 
+  const isCompleted=(value)=>{
+    var remaining=0;
+    value.forEach((row,rowIndex)=>{
+      row.forEach((col,colIndex)=>{
+        if(col!==solution[rowIndex][colIndex]){
+          remaining++
+        }
+      })
+    })
+    if(remaining===0){
+      for(var i=0;i<6;i++){
+        setTimeout(()=>confetti({particleCount: 100,startVelocity: 30,spread: 360,origin: {x: Math.random(),y: Math.random() - 0.2}}),500*i)
+      }
+      timerMethods.pause()
+      setTimeout(() => {
+        Popup.create({
+          title: 'Congratualtions!!!',
+          content: `You finished the sudoku correctly in ${time.hour!==0?time.hour+" h":""} ${time.min!==0?time.min+" m":""} ${time.sec!==0?time.sec+" s":""}`,
+          buttons: {
+              left: [{
+                  text: 'Cancel',
+                  className: 'danger',
+                  action: function () {
+                      /** Close this popup. Close will always close the current visible one, if one is visible */
+                      Popup.close();
+                  }
+              }],
+              right: [{
+                text: 'New Sudoku',
+                className: 'success',
+                action: function () {
+                    Popup.alert('Now you will be redirected to new puzzle.');
+    
+                    /** Close this popup. Close will always close the current visible one, if one is visible */
+                    Popup.close();
+                }
+            }]
+            }
+        })
+      }, 2000);
+    }
+  }
+  useEffect(() => {
+    if(!isEmpty(initialValue))
+    isCompleted(value)
+  }, [value])
+  const isEmpty=(matrix)=>{
+    var count=0;
+    matrix.forEach(row=>{
+      row.forEach(col=>{
+        if(col===null)count++
+      })
+    })
+    return (count===81)?true:false
+  }
   const isFinished = (currentVal) => {
     var currArr = [];
     currentVal.forEach((row) => {
