@@ -28,8 +28,8 @@ function App() {
         return res.json()
       })
       .then(res => {
-        const randSelector=6
-        // const randSelector = Math.floor(Math.random() * res.database.length)
+        // const randSelector=6
+        const randSelector = Math.floor(Math.random() * res.database.length)
         const tempData = res.database[randSelector].data
         if (tempData !== undefined) {
           setInitialValue(res.database[randSelector].data)
