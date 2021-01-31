@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
 import { AppContext } from "../App";
 import confetti from "canvas-confetti";
@@ -22,6 +23,7 @@ function Solve() {
   const [solMatrix, setSolMatrix] = useState(
     Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Array.from("123456789")))
   );
+  const history = useHistory();
 
   const solveSudoku = () => {
     setSolving(true);
@@ -96,7 +98,7 @@ function Solve() {
                 text: "New Sudoku",
                 className: "success",
                 action: function () {
-                  Popup.alert("Now you will be redirected to new puzzle.");
+                  history.push("/");
 
                   /** Close this popup. Close will always close the current visible one, if one is visible */
                   Popup.close();

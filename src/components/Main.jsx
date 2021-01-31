@@ -26,9 +26,7 @@ function Main({ match }) {
           })
           .then((res) => {
             var tempData = JSON.parse(JSON.stringify(res));
-            console.log(match.params.id.toLowerCase());
             tempData = tempData.filter((elem) => elem.mode.toLowerCase() === match.params.id.toLowerCase());
-            console.log(tempData);
             var rand = Math.floor(Math.random() * tempData.length);
             if (rand === tempData.length) rand--;
             console.log(rand);
@@ -39,12 +37,10 @@ function Main({ match }) {
           });
       } else {
         var tempData = JSON.parse(JSON.stringify(database));
-        console.log(match.params.id.toLowerCase());
         tempData = tempData.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase());
-        console.log(tempData);
         var rand = Math.floor(Math.random() * tempData.length);
         if (rand === tempData.length) rand--;
-        console.log(rand);
+        console.log(tempData[rand].data);
         setInitialValue(tempData[rand].data);
       }
     } else {
