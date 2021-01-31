@@ -7,7 +7,7 @@ import { AppContext } from "../App";
 
 function HomePage() {
   useEffect(() => {
-    fetch("../puzzleList.json", { headers: { "Content-Type": "application/json", Accept: "application/json" } })
+    fetch("puzzleList.json", { headers: { "Content-Type": "application/json", Accept: "application/json" } })
       .then((res) => {
         return res.json();
       })

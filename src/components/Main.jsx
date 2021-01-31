@@ -15,7 +15,7 @@ function Main({ match }) {
     };
     if (match.params.id.toLowerCase() !== "create") {
       if (database.length === 0) {
-        fetch("../puzzleList.json", { headers: { "Content-Type": "application/json", Accept: "application/json" } })
+        fetch("puzzleList.json", { headers: { "Content-Type": "application/json", Accept: "application/json" } })
           .then((res) => {
             return res.json();
           })
