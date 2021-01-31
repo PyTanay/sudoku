@@ -12,27 +12,15 @@ function HomePage() {
         return res.json();
       })
       .then((res) => {
-        console.log(res.database.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase()));
-        var temp = res.database.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase());
-        var tempData = {};
-        var randSelector = 1;
-        if (temp.length === 0) {
-          tempData = {};
-        } else {
-          randSelector = Math.floor(Math.random() * temp.length);
-          tempData = temp[randSelector].data;
-        }
-        // const randSelector=6
-        if (tempData !== undefined) {
-          console.log(tempData);
-          setInitialValue(tempData);
-        }
+        var tempData = res.database;
+        setDatabase(tempData);
       })
       .catch((err) => {
         console.log("File could not be loaded for some reason!", err);
       });
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { mode, setMode, setInitialValue } = useContext(AppContext);
+  const { mode, setMode, setDatabase } = useContext(AppContext);
   return (
     <div className="homePage">
       <div>

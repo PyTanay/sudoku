@@ -19,7 +19,7 @@
 }
 h1.title {
   color: white;
-  font-size: 8vw;
+  font-size: 4vw;
   padding: 0px;
   margin: 0px;
 }
@@ -32,6 +32,9 @@ h1.title {
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+  h1.title {
+    font-size: 10vw;
   }
 }
 

@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
 import Popup from "react-popup";
 import "./components/popUp.css";
@@ -25,6 +25,7 @@ function App() {
   const [path, setPath] = useState([]);
   const [mode, setMode] = useState("medium");
   const [highlight, setHighlight] = useState(null);
+  const [database, setDatabase] = useState([]);
   const timerControls = useRef({});
   const timeValue = useRef({ hour: 0, min: 0, sec: 0 });
 
@@ -76,6 +77,8 @@ function App() {
     setHighlight,
     mode,
     setMode,
+    database,
+    setDatabase,
   };
 
   return (
@@ -86,12 +89,14 @@ function App() {
         <AppContext.Provider value={providerValue}>
           <div className="appHeader">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="title">Sudoku</h1>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <h1 className="title">Sudoku</h1>
+            </Link>
             <img src={logo} className="App-logo" alt="logo" />
           </div>
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path="/main/:id" component={Main} />
+            <Route path="/main/:id" exact component={Main} />
           </Switch>
         </AppContext.Provider>
       </Router>

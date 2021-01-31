@@ -3,22 +3,33 @@ import { AppContext } from "../App";
 import "./singleBox.css";
 
 function SingleBox(props) {
-  const { selected, setSelected, value, getCol, getBlock, getBlockAddress, initialValue, path, setPath, solution,displayError,highlight } = useContext(
-    AppContext
-  );
+  const {
+    selected,
+    setSelected,
+    value,
+    getCol,
+    getBlock,
+    getBlockAddress,
+    initialValue,
+    path,
+    setPath,
+    solution,
+    displayError,
+    highlight,
+  } = useContext(AppContext);
   const [address] = useState([props.row, props.col]);
-  const [check, setCheck] = useState(displayError)
+  const [check, setCheck] = useState(displayError);
   var classList = ["singleBox"];
   const pervValueRef = useRef();
   useEffect(() => {
     pervValueRef.current = value;
   });
   useEffect(() => {
-      setCheck(displayError)
-  }, [displayError])
+    setCheck(displayError);
+  }, [displayError]);
   const prevValue = pervValueRef.current;
   useEffect(() => {
-    if (prevValue !== undefined) {
+    if (prevValue !== undefined && initialValue !== undefined) {
       const currVal = value[props.row][props.col];
       const prevVal = prevValue[props.row][props.col];
       if (currVal !== prevVal && initialValue[props.row][props.col] === null) {
@@ -29,6 +40,7 @@ function SingleBox(props) {
         // console.log(`Address ${props.row},${props.col} changed from ${prevVal} to ${currVal}`)
       }
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   //this is for original data - that can not be changed
   if (initialValue.length > 0) {
@@ -45,10 +57,13 @@ function SingleBox(props) {
     classList = classList.filter((elem) => elem !== "selectedBox");
   }
   //this adds class to display mistakes you have made compared to solution
-  if (check && value[address[0]][address[1]] !== solution[address[0]][address[1]] &&
+  if (
+    check &&
+    value[address[0]][address[1]] !== solution[address[0]][address[1]] &&
     value[address[0]][address[1]] !== null &&
     !classList.includes("errorBox") &&
-    !classList.includes("disabledBox")) {
+    !classList.includes("disabledBox")
+  ) {
     classList.push("errorBox");
   } else {
     classList = classList.filter((elem) => elem !== "errorBox");
@@ -112,8 +127,8 @@ function SingleBox(props) {
     }
   }
   //highlight numbers based on the numberBox selection
-  if(highlight!==null && value[address[0]][address[1]]===highlight){
-    classList.push("similarBox")
+  if (highlight !== null && value[address[0]][address[1]] === highlight) {
+    classList.push("similarBox");
   }
 
   return (

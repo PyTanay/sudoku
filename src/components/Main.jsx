@@ -5,7 +5,7 @@ import TimerBox from "./TimerBox";
 import { AppContext } from "../App";
 
 function Main({ match }) {
-  const { setSelected, setHighlight, setInitialValue, mode } = useContext(AppContext);
+  const { setSelected, setHighlight, setInitialValue, mode, database, setDatabase } = useContext(AppContext);
   useEffect(() => {
     const clickChecker = (e) => {
       if (e.target.classList[0] !== "text1" && e.target.classList[0] !== "text") {
@@ -13,34 +13,48 @@ function Main({ match }) {
         setHighlight(null);
       }
     };
-    fetch("../puzzleList.json", { headers: { "Content-Type": "application/json", Accept: "application/json" } })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res.database.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase()));
-        var temp = res.database.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase());
-        var tempData = {};
-        var randSelector = 1;
-        if (temp.length === 0) {
-          tempData = {};
-        } else {
-          randSelector = Math.floor(Math.random() * temp.length);
-          tempData = temp[randSelector].data;
-        }
-        // const randSelector=6
-        if (tempData !== undefined) {
-          console.log(tempData);
-          setInitialValue(tempData);
-        }
-      })
-      .catch((err) => {
-        console.log("File could not be loaded for some reason!", err);
-      });
+    if (match.params.id.toLowerCase() !== "create") {
+      if (database.length === 0) {
+        fetch("../puzzleList.json", { headers: { "Content-Type": "application/json", Accept: "application/json" } })
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            var tempData = res.database;
+            setDatabase(tempData);
+            return tempData;
+          })
+          .then((res) => {
+            var tempData = JSON.parse(JSON.stringify(res));
+            console.log(match.params.id.toLowerCase());
+            tempData = tempData.filter((elem) => elem.mode.toLowerCase() === match.params.id.toLowerCase());
+            console.log(tempData);
+            var rand = Math.floor(Math.random() * tempData.length);
+            if (rand === tempData.length) rand--;
+            console.log(rand);
+            setInitialValue(tempData[rand].data);
+          })
+          .catch((err) => {
+            console.log("File could not be loaded for some reason!", err);
+          });
+      } else {
+        var tempData = JSON.parse(JSON.stringify(database));
+        console.log(match.params.id.toLowerCase());
+        tempData = tempData.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase());
+        console.log(tempData);
+        var rand = Math.floor(Math.random() * tempData.length);
+        if (rand === tempData.length) rand--;
+        console.log(rand);
+        setInitialValue(tempData[rand].data);
+      }
+    } else {
+      setInitialValue(Array(9).fill(Array(9).fill(null)));
+    }
     document.addEventListener("click", clickChecker);
     return () => {
       document.removeEventListener("click", clickChecker);
     };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>

@@ -5,12 +5,12 @@ import "./utility.css";
 import Solve from "./Solve";
 
 function Utility() {
-  const { value, setValue, initialValue, timerControls } = useContext(AppContext);
+  const { value, setValue, initialValue, timerControls, mode } = useContext(AppContext);
   const exportSudoku = () => {
     const tempDate = new Date(Date.now());
     const temp = {
       creator: "Tanay",
-      mode: "",
+      mode: mode.toLowerCase(),
       time: tempDate.toLocaleString("en-GB"),
       data: value,
     };
