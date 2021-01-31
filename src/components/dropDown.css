@@ -1,0 +1,120 @@
+/* * {
+  box-sizing: border-box;
+}
+
+body {
+font-family: 'Montserrat', sans-serif;
+background:  #292b31;
+color: #dddddd;}
+
+h1 {margin-top: 100px; text-align: center;
+} */
+.dummyDropDown {
+  height: 6.5vh;
+  width: 25vw;
+}
+.dropdown {
+  /* box-sizing: border-box; */
+  position: relative;
+  top: 0px;
+  margin: 0 auto;
+  height: 6.5vh;
+  width: 25vw;
+  min-width: 250px;
+  border: 2px solid #466943;
+  border-radius: 5vh;
+  background: #282c34;
+  transition-duration: 0.5s;
+}
+.dropdown.active {
+  box-sizing: border-box;
+  border-top-left-radius: 2.5vh;
+  border-top-right-radius: 2.5vh;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.dropdown__text {
+  color: white;
+  font-weight: 400;
+  padding: 15px 16px;
+  cursor: pointer;
+  height: auto;
+}
+
+.dropdown__text:hover {
+  color: white;
+  /* background: #475154; */
+}
+
+.dropdown__text:after {
+  content: "";
+  transition: all 1s;
+  border: solid #ccc;
+  border-width: 0 1px 1px 0;
+  float: right;
+  margin-top: 8px;
+  margin-right: 6px;
+  padding: 5px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.dropdown.active .dropdown__text:after {
+  margin-top: 1px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.dropdown__items {
+  box-sizing: border-box;
+
+  position: relative;
+  top: 0vh;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  transition: max-height 1s ease;
+}
+
+.dropdown.active .dropdown__items {
+  visibility: visible;
+  box-sizing: border-box;
+
+  /* border-top: 1px solid #666; */
+  height: auto;
+  max-height: 500%;
+  opacity: 1;
+  background-color: #282c34;
+  transition: max-height 1s, opacity 0.1s, visibility 0.1s ease-in-out;
+}
+
+.dropdown__item {
+  cursor: pointer;
+  border-left: 2px solid #466943;
+  border-right: 2px solid #466943;
+  padding: 15px 15px;
+  color: white;
+  font-weight: 400;
+  transition-duration: 0.1s;
+}
+
+.dropdown__item:last-child {
+  border-bottom: 2px solid #466943;
+  border-bottom-left-radius: 2.5vh;
+  border-bottom-right-radius: 2.5vh;
+}
+
+.dropdown__item:hover {
+  color: white;
+  background: #3a4143;
+}
+@media only screen and (max-width: 600px) {
+  .dummyDropDown {
+    height: 6.5vh;
+    width: 60vw;
+  }
+  .dropdown {
+    box-sizing: border-box;
+    height: 6.5vh;
+    width: 70vw;
+  }
+}
