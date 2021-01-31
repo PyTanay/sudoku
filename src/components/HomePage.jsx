@@ -18,9 +18,11 @@ function HomePage() {
       .catch((err) => {
         console.log("File could not be loaded for some reason!", err);
       });
+    setSolution(Array(9).fill(Array(9).fill(null)));
+    setSolMatrix(Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Array.from("123456789"))));
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { mode, setMode, setDatabase } = useContext(AppContext);
+  const { mode, setMode, setDatabase, setSolution, setSolMatrix } = useContext(AppContext);
   return (
     <div className="homePage">
       <div>

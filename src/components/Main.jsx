@@ -29,7 +29,6 @@ function Main({ match }) {
             tempData = tempData.filter((elem) => elem.mode.toLowerCase() === match.params.id.toLowerCase());
             var rand = Math.floor(Math.random() * tempData.length);
             if (rand === tempData.length) rand--;
-            console.log(rand);
             setInitialValue(tempData[rand].data);
           })
           .catch((err) => {
@@ -40,7 +39,6 @@ function Main({ match }) {
         tempData = tempData.filter((elem) => elem.mode.toLowerCase() === mode.toLowerCase());
         var rand = Math.floor(Math.random() * tempData.length);
         if (rand === tempData.length) rand--;
-        console.log(tempData[rand].data);
         setInitialValue(tempData[rand].data);
       }
     } else {

@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
 import Popup from "react-popup";
 import "./components/popUp.css";
@@ -26,6 +27,9 @@ function App() {
   const [mode, setMode] = useState("medium");
   const [highlight, setHighlight] = useState(null);
   const [database, setDatabase] = useState([]);
+  const [solMatrix, setSolMatrix] = useState(
+    Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Array.from("123456789")))
+  );
   const timerControls = useRef({});
   const timeValue = useRef({ hour: 0, min: 0, sec: 0 });
 
@@ -79,6 +83,8 @@ function App() {
     setMode,
     database,
     setDatabase,
+    solMatrix,
+    setSolMatrix,
   };
 
   return (

@@ -17,12 +17,12 @@ function Solve() {
     Popup,
     timerControls,
     timeValue,
+    solMatrix,
+    setSolMatrix,
   } = useContext(AppContext);
   const [solving, setSolving] = useState(false);
   const [counter, setCounter] = useState(1);
-  const [solMatrix, setSolMatrix] = useState(
-    Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Array.from("123456789")))
-  );
+
   const history = useHistory();
 
   const solveSudoku = () => {
@@ -36,6 +36,7 @@ function Solve() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
+    // console.log(solution);
     if (isFinished(solution) === false && counter < 20 && solving === true) {
       // console.log(solMatrix,"Iteration",counter)
       setSolution(methodA(solution));
