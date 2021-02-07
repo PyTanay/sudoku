@@ -61,18 +61,12 @@ function NumberSelector(props) {
           var lastElem = tempPath.pop();
           tempFwPath.push(lastElem);
           temp1[lastElem.row][lastElem.col] = lastElem.prevVal;
-          // console.log(tempFwPath);
-          // console.log(fwPath);
           autoValChange.current = true;
           setFwPath(tempFwPath);
           setValue(temp1);
           setPath(tempPath);
-          // console.log(tempPath);
-          // console.log(lastElem, temp[lastElem.row][lastElem.col]);
-          // console.log(temp);
         }
       } else if (props.val.props.tip === "Step Forward") {
-        // console.log(fwPath);
         if (fwPath.length !== 0) {
           var temp2 = JSON.parse(JSON.stringify(value));
           var tempPath2 = JSON.parse(JSON.stringify(path));

@@ -34,15 +34,13 @@ function SingleBox(props) {
     if (prevValue !== undefined && initialValue !== undefined) {
       const currVal = value[props.row][props.col];
       const prevVal = prevValue[props.row][props.col];
+      //if statement below makes sure that entry was done by user and not by the forward or backward buttons with autoValChange ref
       if (currVal !== prevVal && initialValue[props.row][props.col] === null && autoValChange.current === false) {
-        // console.log(autoValChange.current);
         const data = { row: props.row, col: props.col, currVal, prevVal };
         const tempPath = JSON.parse(JSON.stringify(path));
         tempPath.push(data);
         setPath(tempPath);
-        setFwPath([]);
-        // console.log(`Address ${props.row},${props.col} changed from ${prevVal} to ${currVal}`);
-        // console.log(path);
+        setFwPath([]); //empty out the forward path array when manual entry is done to eliminate the other branches
       } else if (autoValChange.current === true && props.row === 8 && props.col === 8) {
         autoValChange.current = false;
       }
