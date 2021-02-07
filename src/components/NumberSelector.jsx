@@ -5,9 +5,22 @@ import "./numberSelector.css";
 import ReactTooltip from "react-tooltip";
 
 function NumberSelector(props) {
-  const { value, setValue, selected, setHighlight, initialValue, timerControls, setDisplayError, paused, setPaused } = useContext(
-    AppContext
-  );
+  const {
+    value,
+    setValue,
+    selected,
+    setHighlight,
+    initialValue,
+    timerControls,
+    setDisplayError,
+    paused,
+    setPaused,
+    path,
+    setPath,
+    fwPath,
+    setFwPath,
+    autoValChange,
+  } = useContext(AppContext);
   const history = useHistory();
   const onclick1 = () => {
     if (selected[0] >= 0) {
@@ -40,6 +53,38 @@ function NumberSelector(props) {
         }, 2000);
       } else if (props.val.props.tip === "Pause") {
         setPaused(!paused);
+      } else if (props.val.props.tip === "Step Back") {
+        if (path.length !== 0) {
+          var temp1 = JSON.parse(JSON.stringify(value));
+          var tempPath = JSON.parse(JSON.stringify(path));
+          var tempFwPath = JSON.parse(JSON.stringify(fwPath));
+          var lastElem = tempPath.pop();
+          tempFwPath.push(lastElem);
+          temp1[lastElem.row][lastElem.col] = lastElem.prevVal;
+          // console.log(tempFwPath);
+          // console.log(fwPath);
+          autoValChange.current = true;
+          setFwPath(tempFwPath);
+          setValue(temp1);
+          setPath(tempPath);
+          // console.log(tempPath);
+          // console.log(lastElem, temp[lastElem.row][lastElem.col]);
+          // console.log(temp);
+        }
+      } else if (props.val.props.tip === "Step Forward") {
+        // console.log(fwPath);
+        if (fwPath.length !== 0) {
+          var temp2 = JSON.parse(JSON.stringify(value));
+          var tempPath2 = JSON.parse(JSON.stringify(path));
+          var tempFwPath2 = JSON.parse(JSON.stringify(fwPath));
+          var lastElem2 = tempFwPath2.pop();
+          temp2[lastElem2.row][lastElem2.col] = lastElem2.currVal;
+          tempPath2.push(lastElem2);
+          autoValChange.current = true;
+          setPath(tempPath2);
+          setFwPath(tempFwPath2);
+          setValue(temp2);
+        }
       }
     }
   };

@@ -24,6 +24,7 @@ function App() {
   const [solution, setSolution] = useState(Array(9).fill(Array(9).fill(null)));
   const [displayError, setDisplayError] = useState(false);
   const [path, setPath] = useState([]);
+  const [fwPath, setFwPath] = useState([]);
   const [mode, setMode] = useState("medium");
   const [highlight, setHighlight] = useState(null);
   const [database, setDatabase] = useState([]);
@@ -33,6 +34,7 @@ function App() {
   );
   const timerControls = useRef({});
   const timeValue = useRef({ hour: 0, min: 0, sec: 0 });
+  const autoValChange = useRef(false);
 
   useEffect(() => {
     if (initialValue.length > 0) setValue([...initialValue]);
@@ -73,6 +75,8 @@ function App() {
     setSolution,
     path,
     setPath,
+    fwPath,
+    setFwPath,
     displayError,
     setDisplayError,
     Popup,
@@ -88,6 +92,7 @@ function App() {
     setSolMatrix,
     paused,
     setPaused,
+    autoValChange,
   };
 
   return (

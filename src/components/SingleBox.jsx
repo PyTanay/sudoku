@@ -13,9 +13,11 @@ function SingleBox(props) {
     initialValue,
     path,
     setPath,
+    setFwPath,
     solution,
     displayError,
     highlight,
+    autoValChange,
   } = useContext(AppContext);
   const [address] = useState([props.row, props.col]);
   const [check, setCheck] = useState(displayError);
@@ -32,12 +34,17 @@ function SingleBox(props) {
     if (prevValue !== undefined && initialValue !== undefined) {
       const currVal = value[props.row][props.col];
       const prevVal = prevValue[props.row][props.col];
-      if (currVal !== prevVal && initialValue[props.row][props.col] === null) {
+      if (currVal !== prevVal && initialValue[props.row][props.col] === null && autoValChange.current === false) {
+        // console.log(autoValChange.current);
         const data = { row: props.row, col: props.col, currVal, prevVal };
         const tempPath = JSON.parse(JSON.stringify(path));
         tempPath.push(data);
         setPath(tempPath);
-        // console.log(`Address ${props.row},${props.col} changed from ${prevVal} to ${currVal}`)
+        setFwPath([]);
+        // console.log(`Address ${props.row},${props.col} changed from ${prevVal} to ${currVal}`);
+        // console.log(path);
+      } else if (autoValChange.current === true && props.row === 8 && props.col === 8) {
+        autoValChange.current = false;
       }
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps

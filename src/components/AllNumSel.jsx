@@ -1,7 +1,7 @@
 import React from "react";
 import NumberSelector from "./NumberSelector";
 import "./allNumSel.css";
-import { BiEraser, BiExport, BiReset } from "react-icons/bi";
+import { BiEraser, BiExport, BiReset, BiBulb } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { MdPause } from "react-icons/md";
 import { BsCheckCircle } from "react-icons/bs";
@@ -44,6 +44,7 @@ function AllNumSel() {
       <BiReset tip="Reset" />,
       <BsCheckCircle tip="Check" />,
       <MdPause tip="Pause" />,
+      <BiBulb tip="Hint" />,
     ];
   }
   return (
