@@ -7,6 +7,7 @@ import { MdPause } from "react-icons/md";
 import { BsCheckCircle } from "react-icons/bs";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import Utility from "./Utility";
+import Solve from "./Solve";
 
 function AllNumSel() {
   var arr1 = [
@@ -51,6 +52,7 @@ function AllNumSel() {
         <NumberSelector key={index} val={x} />
       ))}
       {window.innerWidth > 620 && <Utility />}
+      {window.innerWidth <= 620 && <Solve />}
     </div>
   );
 }

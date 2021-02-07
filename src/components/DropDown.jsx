@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./dropDown.css";
-// import { Appcontext } from "../App";
 const race = ["Beginner", "Easy", "Medium", "Hard", "Extreme"];
 
 class Dropdown extends Component {
-  // static contextType = Appcontext;
   constructor(props) {
     super(props);
     this.state = {

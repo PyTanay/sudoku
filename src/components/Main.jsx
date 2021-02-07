@@ -5,7 +5,7 @@ import TimerBox from "./TimerBox";
 import { AppContext } from "../App";
 
 function Main({ match }) {
-  const { setSelected, setHighlight, setInitialValue, mode, database, setDatabase } = useContext(AppContext);
+  const { setSelected, setHighlight, setInitialValue, mode, database, setDatabase, setValue } = useContext(AppContext);
   useEffect(() => {
     const clickChecker = (e) => {
       if (e.target.classList[0] !== "text1" && e.target.classList[0] !== "text") {
@@ -30,6 +30,7 @@ function Main({ match }) {
             var rand = Math.floor(Math.random() * tempData.length);
             if (rand === tempData.length) rand--;
             setInitialValue(tempData[rand].data);
+            setValue(tempData[rand].data);
           })
           .catch((err) => {
             console.log("File could not be loaded for some reason!", err);
@@ -40,9 +41,11 @@ function Main({ match }) {
         var rand = Math.floor(Math.random() * tempData.length);
         if (rand === tempData.length) rand--;
         setInitialValue(tempData[rand].data);
+        setValue(tempData[rand].data);
       }
     } else {
       setInitialValue(Array(9).fill(Array(9).fill(null)));
+      setValue(Array(9).fill(Array(9).fill(null)));
     }
     document.addEventListener("click", clickChecker);
     return () => {

@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
 import { AppContext } from "../App";
 import confetti from "canvas-confetti";
+import "./solve.css";
 
 function Solve() {
   const {
@@ -24,21 +25,31 @@ function Solve() {
   const [counter, setCounter] = useState(1);
 
   const history = useHistory();
+  const pervValueRef = useRef();
+  useEffect(() => {
+    pervValueRef.current = value;
+  });
+  const prevValue = pervValueRef.current;
 
   const solveSudoku = () => {
     setSolving(true);
     setSolution(methodA(value));
   };
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
+    // console.log(isEmpty(initialValue), initialValue);
+    // console.log(solution, counter, solving, value.toString(), initialValue.toString(), solMatrix.toString(), prevValue);
+    if (isEmpty(initialValue) === false && prevValue !== undefined) {
+      setSolMatrix(Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Array.from("123456789"))));
+      setSolving(true);
       solveSudoku();
-    }, 200);
+    }
+    // }, 200);
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initialValue]);
   useEffect(() => {
-    // console.log(solution);
     if (isFinished(solution) === false && counter < 20 && solving === true) {
-      // console.log(solMatrix,"Iteration",counter)
+      // console.log(solMatrix, "Iteration", counter);
       setSolution(methodA(solution));
       setCounter(counter + 1);
     } else if (isFinished(solution) === true) {
@@ -54,7 +65,7 @@ function Solve() {
       setCounter(1);
     } else {
       console.log("something's wrong");
-      setSolving(false);
+      // setSolving(false);
       setCounter(1);
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -136,6 +147,7 @@ function Solve() {
   //methodA --> checks the cell against row column and blocks and figures which solutions are possible for the cell
   //methodB --> checks the cell solutions based on the other for related blocks
   const methodA = (startPoint) => {
+    // console.log(solution, counter, solving, value.toString(), initialValue.toString(), solMatrix.toString());
     var temp = JSON.parse(JSON.stringify(startPoint));
     var tempSol = Array(9).fill([]);
     // console.log(solMatrix)
@@ -192,7 +204,7 @@ function Solve() {
         tempMatrix[rowIndex][colIndex] = col;
       });
     });
-    // console.log(tempMatrix.map(elem=>elem.map(elem1=>elem1.toString())))
+    // console.log(tempMatrix.map((elem) => elem.map((elem1) => elem1.toString())));
     setSolMatrix(tempMatrix);
     // console.log(solMatrix.map(elem=>elem.map(elem1=>elem1.toString())))
 
