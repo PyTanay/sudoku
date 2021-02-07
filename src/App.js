@@ -27,6 +27,7 @@ function App() {
   const [mode, setMode] = useState("medium");
   const [highlight, setHighlight] = useState(null);
   const [database, setDatabase] = useState([]);
+  const [paused, setPaused] = useState(false);
   const [solMatrix, setSolMatrix] = useState(
     Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Array.from("123456789")))
   );
@@ -85,6 +86,8 @@ function App() {
     setDatabase,
     solMatrix,
     setSolMatrix,
+    paused,
+    setPaused,
   };
 
   return (

@@ -5,7 +5,9 @@ import "./numberSelector.css";
 import ReactTooltip from "react-tooltip";
 
 function NumberSelector(props) {
-  const { value, setValue, selected, setHighlight, initialValue, timerControls, setDisplayError } = useContext(AppContext);
+  const { value, setValue, selected, setHighlight, initialValue, timerControls, setDisplayError, paused, setPaused } = useContext(
+    AppContext
+  );
   const history = useHistory();
   const onclick1 = () => {
     if (selected[0] >= 0) {
@@ -36,7 +38,8 @@ function NumberSelector(props) {
         setTimeout(() => {
           setDisplayError(false);
         }, 2000);
-      } else {
+      } else if (props.val.props.tip === "Pause") {
+        setPaused(!paused);
       }
     }
   };

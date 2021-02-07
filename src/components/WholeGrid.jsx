@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import OneRow from "./OneRow";
 import "./wholeGrid.css";
+import { AiFillPlayCircle } from "react-icons/ai";
 import { AppContext } from "../App";
 
 function WholeGrid() {
-  const { selected, setSelected, value, setValue, initialValue } = useContext(AppContext);
+  const { selected, setSelected, value, setValue, initialValue, timerControls, paused, setPaused } = useContext(AppContext);
   useEffect(() => {
     const changeValue = (e) => {
       if (selected.length !== 0 && selected[0] !== undefined) {
@@ -81,7 +82,21 @@ function WholeGrid() {
     };
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
-
+  useEffect(() => {
+    if (paused) {
+      document.querySelector(".pause-btn").style.display = "initial";
+      timerControls.current.pause();
+    } else {
+      document.querySelector(".pause-btn").style.display = "none";
+      timerControls.current.resume();
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paused]);
+  const clickPlay = () => {
+    document.querySelector(".pause-btn").style.display = "none";
+    timerControls.current.resume();
+    setPaused(!paused);
+  };
   return (
     <div className="wholeGrid">
       {[...Array(9)].map((x, index) =>
@@ -94,6 +109,9 @@ function WholeGrid() {
           <OneRow key={index} row={index} />
         )
       )}
+      <div className="pause-btn">
+        <AiFillPlayCircle className="play-btn" onClick={clickPlay} />
+      </div>
     </div>
   );
 }
