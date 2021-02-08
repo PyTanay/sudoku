@@ -222,6 +222,15 @@ function Solve() {
           }
         }
       }
+      if (elem.length === 3 && arr1.filter((elem1) => elem1.toString() === elem.toString()).length === 3) {
+        if (elem.toString() !== tempArr.toString()) {
+          if (!temp.includes(elem[0]) && !temp.includes(elem[1]) && !temp.includes(elem[1])) {
+            temp.push(elem[0]);
+            temp.push(elem[1]);
+            temp.push(elem[2]);
+          }
+        }
+      }
     });
     // console.log(temp)
     tempArr = tempArr.filter((elem2) => !temp.includes(elem2));
