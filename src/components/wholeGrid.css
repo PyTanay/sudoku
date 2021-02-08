@@ -1,11 +1,29 @@
 .wholeGrid {
   /* float: left; */
+  position: relative;
 }
 .hLine {
   margin: auto;
   width: 65%;
   height: 3px;
   background-color: rgb(19, 97, 243);
+}
+.pause-btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 100px;
+  color: white;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(7px);
+}
+.play-btn {
+  position: relative;
+  top: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
 }
 @media only screen and (max-width: 600px) {
   .hLine {

@@ -3,32 +3,49 @@ import { AppContext } from "../App";
 import "./singleBox.css";
 
 function SingleBox(props) {
-  const { selected, setSelected, value, getCol, getBlock, getBlockAddress, initialValue, path, setPath, solution,displayError } = useContext(
-    AppContext
-  );
+  const {
+    selected,
+    setSelected,
+    value,
+    getCol,
+    getBlock,
+    getBlockAddress,
+    initialValue,
+    path,
+    setPath,
+    setFwPath,
+    solution,
+    displayError,
+    highlight,
+    autoValChange,
+  } = useContext(AppContext);
   const [address] = useState([props.row, props.col]);
-  const [check, setCheck] = useState(displayError)
+  const [check, setCheck] = useState(displayError);
   var classList = ["singleBox"];
   const pervValueRef = useRef();
   useEffect(() => {
     pervValueRef.current = value;
   });
   useEffect(() => {
-      setCheck(displayError)
-  }, [displayError])
+    setCheck(displayError);
+  }, [displayError]);
   const prevValue = pervValueRef.current;
   useEffect(() => {
-    if (prevValue !== undefined) {
+    if (prevValue !== undefined && initialValue !== undefined) {
       const currVal = value[props.row][props.col];
       const prevVal = prevValue[props.row][props.col];
-      if (currVal !== prevVal && initialValue[props.row][props.col] === null) {
+      //if statement below makes sure that entry was done by user and not by the forward or backward buttons with autoValChange ref
+      if (currVal !== prevVal && initialValue[props.row][props.col] === null && autoValChange.current === false) {
         const data = { row: props.row, col: props.col, currVal, prevVal };
         const tempPath = JSON.parse(JSON.stringify(path));
         tempPath.push(data);
         setPath(tempPath);
-        // console.log(`Address ${props.row},${props.col} changed from ${prevVal} to ${currVal}`)
+        setFwPath([]); //empty out the forward path array when manual entry is done to eliminate the other branches
+      } else if (autoValChange.current === true && props.row === 8 && props.col === 8) {
+        autoValChange.current = false;
       }
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   //this is for original data - that can not be changed
   if (initialValue.length > 0) {
@@ -45,14 +62,14 @@ function SingleBox(props) {
     classList = classList.filter((elem) => elem !== "selectedBox");
   }
   //this adds class to display mistakes you have made compared to solution
-  if (check && value[address[0]][address[1]] !== solution[address[0]][address[1]] &&
+  if (
+    check &&
+    value[address[0]][address[1]] !== solution[address[0]][address[1]] &&
     value[address[0]][address[1]] !== null &&
     !classList.includes("errorBox") &&
-    !classList.includes("disabledBox")) {
-    // console.log("Pushing error box");
-    // classList=classList.filter(elem=>elem!=="")
+    !classList.includes("disabledBox")
+  ) {
     classList.push("errorBox");
-    // console.log(classList);
   } else {
     classList = classList.filter((elem) => elem !== "errorBox");
   }
@@ -113,6 +130,10 @@ function SingleBox(props) {
     } else {
       classList = classList.filter((elem) => elem !== "dangerBox");
     }
+  }
+  //highlight numbers based on the numberBox selection
+  if (highlight !== null && value[address[0]][address[1]] === highlight) {
+    classList.push("similarBox");
   }
 
   return (

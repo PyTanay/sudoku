@@ -2,6 +2,7 @@
   text-align: center;
   background-color: #282c34;
   min-height: 100vh;
+  font-family: "Montserrat", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 .appHeader {
   display: flex;
@@ -18,7 +19,7 @@
 }
 h1.title {
   color: white;
-  font-size: 7vmin;
+  font-size: 5vw;
   padding: 0px;
   margin: 0px;
 }
@@ -33,11 +34,15 @@ h1.title {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.App-link {
-  color: #61dafb;
+@media only screen and (max-width: 600px) {
+  h1.title {
+    font-size: 15vw;
+  }
 }
 
+/* .App-link {
+  color: #61dafb;
+} */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
