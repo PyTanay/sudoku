@@ -198,19 +198,19 @@ function Solve() {
         const colArr = getCol(tempMatrix, colIndex);
         const blockArr = getBlock(tempMatrix, getBlockAddress([rowIndex, colIndex]));
         // console.log("Address",rowIndex,colIndex)
-        col = findUniquePair(col, rowArr);
-        col = findUniquePair(col, colArr);
-        col = findUniquePair(col, blockArr);
+        col = cleanUpArr(col, rowArr);
+        col = cleanUpArr(col, colArr);
+        col = cleanUpArr(col, blockArr);
         tempMatrix[rowIndex][colIndex] = col;
       });
     });
     // console.log(tempMatrix.map((elem) => elem.map((elem1) => elem1.toString())));
     setSolMatrix(tempMatrix);
-    // console.log(solMatrix.map(elem=>elem.map(elem1=>elem1.toString())))
+    console.log(solMatrix.map((elem) => elem.map((elem1) => elem1.toString())));
 
     // solMatrix=tempMatrix
   };
-  const findUniquePair = (valArr, arr1) => {
+  const cleanUpArr = (valArr, arr1) => {
     var tempArr = JSON.parse(JSON.stringify(valArr));
     var temp = [];
     arr1.forEach((elem) => {
@@ -224,16 +224,58 @@ function Solve() {
       }
       if (elem.length === 3 && arr1.filter((elem1) => elem1.toString() === elem.toString()).length === 3) {
         if (elem.toString() !== tempArr.toString()) {
-          if (!temp.includes(elem[0]) && !temp.includes(elem[1]) && !temp.includes(elem[1])) {
-            temp.push(elem[0]);
-            temp.push(elem[1]);
-            temp.push(elem[2]);
+          !temp.includes(elem[0]) && temp.push(elem[0]);
+          !temp.includes(elem[1]) && temp.push(elem[1]);
+          !temp.includes(elem[2]) && temp.push(elem[2]);
+        }
+      }
+      if (elem.length === 3 && arr1.filter((elem1) => elem1.toString() === elem.toString()).length === 2) {
+        if (
+          arr1.filter((elem1) => elem1.toString() === [elem[0], elem[1]].toString()).length === 1 ||
+          arr1.filter((elem1) => elem1.toString() === [elem[1], elem[2]].toString()).length === 1 ||
+          arr1.filter((elem1) => elem1.toString() === [elem[0], elem[2]].toString()).length === 1
+        ) {
+          if (elem.toString() !== tempArr.toString()) {
+            if (
+              tempArr.toString() !== [elem[0], elem[1]].toString() &&
+              tempArr.toString() !== [elem[1], elem[2]].toString() &&
+              tempArr.toString() !== [elem[0], elem[2]].toString()
+            ) {
+              !temp.includes(elem[0]) && temp.push(elem[0]);
+              !temp.includes(elem[1]) && temp.push(elem[1]);
+              !temp.includes(elem[2]) && temp.push(elem[2]);
+            }
           }
         }
       }
+      //here I have to implement the method that removes other digits from the two cells those share only two occurances of two digits
     });
-    // console.log(temp)
+    if (tempArr.length > 2) {
+      tempArr.forEach((elem1) => {
+        var rest = tempArr.filter((elem2) => elem2 !== elem1);
+        rest.forEach((elem2) => {
+          var pair = elem1 + "," + elem2;
+          if (arr1.filter((elem3) => elem3.toString().includes(pair)).length === 2) {
+            // console.log(
+            //   pair,
+            //   tempArr.filter((elem4) => elem4 !== elem1 && elem4 !== elem2)
+            // );
+            tempArr
+              .filter((elem4) => elem4 !== elem1)
+              .filter((elem4) => elem4 !== elem2)
+              .forEach((x) => {
+                // if(tempArr.toString()===)
+                // console.log(x);
+                // !temp.includes(x) && temp.push(x);
+                // console.log(temp);
+              });
+          }
+        });
+      });
+    }
+    temp.length !== 0 && console.log(tempArr);
     tempArr = tempArr.filter((elem2) => !temp.includes(elem2));
+    temp.length !== 0 && console.log(tempArr);
     return tempArr;
   };
   const findUniqueFromMatrix = (valArr, matrix, row, col) => {
